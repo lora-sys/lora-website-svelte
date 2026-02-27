@@ -1,18 +1,22 @@
-# Portfolio Template
+# Lora's Portfolio
 
-Inspired from [Magic UI](https://magicui.design) Portfolio Template & [Dillion Verma](https://github.com/dillionverma)
-Build with Svelte, [shadcn-svelte](https://www.shadcn-svelte.com) and [Svelte-Animations](https://animation-svelte.vercel.app)
+Inspired by [Magic UI](https://magicui.design) Portfolio Template & [Dillion Verma](https://github.com/dillionverma)
+Built with Svelte 5, [shadcn-svelte](https://www.shadcn-svelte.com), [Svelte-Motion](https://motion.svelte.dev) and [TailwindCSS](https://tailwindcss.com)
 
 ## Features
 
 ---
 
-- Setup only takes a few minutes by editing the [single config file](https://github.com/SikandarJODD/portfolio-template/blob/main/src/lib/data/resume.ts)
-- Built using SvelteKit, Typescript, Shadcn/UI, TailwindCSS, Svelte - Motion, Svelte Animations
-- Responsive for different devices
-- Optimized for Svelte and Vercel
-- Anime Section with Carousel & Lens animation
-- Favorites Section with Bento Grid & Dialog modal
+- Easy customization via single [config file](src/lib/data/resume.ts)
+- SvelteKit 2 + Svelte 5 + TypeScript
+- [shadcn-svelte](https://www.shadcn-svelte.com) UI components
+- Responsive design for all devices
+- MacOS-style floating Dock with magnification animation
+- Anime Section with Carousel & Lens/zoom effect
+- Favorites Section with Bento Grid & Dialog modal (Spotify embed)
+- 21+ Hackathons timeline with awards
+- Blog with Markdown & syntax highlighting (mdsvex + Shiki)
+- Scroll-triggered BlurFade animations
 - Dark/Light mode support
 
 ## Getting Started
@@ -22,25 +26,30 @@ Build with Svelte, [shadcn-svelte](https://www.shadcn-svelte.com) and [Svelte-An
 1. Clone the repository
 
 ```bash
-git clone https://github.com/SikandarJODD/portfolio-template
+git clone https://github.com/your-username/lora-website
 ```
 
-2. Move into the project directory
-
-```bash
-cd portfolio-template
-```
-
-3. Install dependencies
+2. Install dependencies
 
 ```bash
 npm install
 ```
 
-4. Start the development server
+3. Start the development server
 
 ```bash
 npm run dev
 ```
 
-5. Open the [Config File](https://github.com/SikandarJODD/portfolio-template/blob/main/src/lib/data/resume.ts) and make changes
+4. Customize content in [resume.ts](src/lib/data/resume.ts)
+
+## Tech Stack
+
+---
+
+- **Framework**: SvelteKit 2, Svelte 5
+- **Styling**: TailwindCSS, shadcn-svelte
+- **Animations**: Svelte-Motion, svelte-inview
+- **Content**: mdsvex, Shiki (syntax highlighting)
+- **Icons**: Lucide Svelte
+- **Deployment**: Vercel ready
