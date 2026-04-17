@@ -31,7 +31,7 @@
 		return val - bounds.x - bounds.width / 2;
 	});
 
-	let widthSync = useTransform(distanceCalc, [-distance, 0, distance], [38, magnification, 38]);
+	let widthSync = $derived(useTransform(distanceCalc, [-distance, 0, distance], [38, magnification, 38]));
 
 	let width = useSpring(widthSync, {
 		mass: 0.1,
@@ -39,10 +39,10 @@
 		damping: 12
 	});
 
-	let iconClass = cn(
+	let iconClass = $derived(cn(
 		'flex aspect-square cursor-pointer items-center justify-center rounded-full',
 		className
-	);
+	));
 
 	const children_render = $derived(children);
 </script>

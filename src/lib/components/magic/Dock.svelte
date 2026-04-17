@@ -40,11 +40,11 @@
 		mouseX = Infinity;
 	}
 
-	let dockClass = cn(dockVariants({ className }), {
+	let dockClass = $derived(cn(dockVariants({ className }), {
 		'items-start': direction === 'top',
 		'items-center': direction === 'middle',
 		'items-end': direction === 'bottom'
-	});
+	}));
 
 	const children_render = $derived(children);
 </script>

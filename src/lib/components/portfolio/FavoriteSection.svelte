@@ -53,6 +53,7 @@
 									frameborder="0"
 									allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 									loading="lazy"
+									title="{item.name} Spotify playlist"
 									style="border-radius: 12px"
 								></iframe>
 							</div>
