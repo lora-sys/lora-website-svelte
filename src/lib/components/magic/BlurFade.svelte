@@ -1,19 +1,13 @@
 <script lang="ts">
-	import { Motion, AnimatePresence } from 'svelte-motion';
 	import { inview } from 'svelte-inview';
 	import { cn } from '$lib/utils';
-	let defaultVariants = $derived({
-		hidden: { opacity: 0, y: yOffset, filter: `blur(${blur})` },
-		visible: { opacity: 1, y: 0, filter: `blur(0px)` }
-	});
-	let isInView = $state('hidden');
+
 	interface Props {
 		duration?: number;
 		delay?: number;
 		yOffset?: number;
 		inViewMargin?: string;
 		blur?: string;
-		id?: any;
 		once?: boolean;
 		class?: string;
 		children?: import('svelte').Snippet;
@@ -25,40 +19,33 @@
 		yOffset = 8,
 		inViewMargin = '-20px',
 		blur = '2px',
-		id = crypto.randomUUID().slice(0, 6),
 		once = true,
 		class: _class = '',
 		children
 	}: Props = $props();
 
-	const children_render = $derived(children);
+	let isVisible = $state(false);
+	let isBlurred = $derived(!isVisible);
 </script>
 
-<AnimatePresence list={[{ key: id }]}>
-	{#snippet children({ item })}
-		<Motion
-			initial="hidden"
-			animate={isInView}
-			exit="hidden"
-			variants={defaultVariants}
-			transition={{
-				delay: 0.04 + delay,
-				duration,
-				ease: 'easeOut'
-			}}
-		>
-			{#snippet children({ motion })}
-				<div
-					use:inview={{ rootMargin: inViewMargin, unobserveOnEnter: once }}
-					use:motion
-					oninview_change={({ detail }) => {
-						isInView = detail.inView ? 'visible' : 'hidden';
-					}}
-					class={cn(_class)}
-				>
-					{#if children_render}{@render children_render()}{:else}Default{/if}
-				</div>
-			{/snippet}
-		</Motion>
-	{/snippet}
-</AnimatePresence>
+<div
+	use:inview={{
+		rootMargin: inViewMargin,
+		unobserveOnEnter: once
+	}}
+	oninview_change={({ detail }) => {
+		if (detail.inView) isVisible = true;
+	}}
+	class={cn(
+		'will-change-[opacity,transform,filter]',
+		'transition-all ease-out',
+		isVisible ? 'opacity-100' : 'opacity-0',
+		_class
+	)}
+	style:transform={isVisible ? 'translateY(0)' : `translateY(${yOffset}px)`}
+	style:filter={isBlurred ? `blur(${blur})` : 'none'}
+	style:transition-duration="{duration}s"
+	style:transition-delay="{0.04 + delay}s"
+>
+	{#if children}{@render children()}{:else}Default{/if}
+</div>
