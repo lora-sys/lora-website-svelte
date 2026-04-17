@@ -11,6 +11,7 @@
 	import { Spotlight } from '$lib/components/aceternity';
 	import { TextGenerateEffect } from '$lib/components/aceternity';
 	import { BentoGrid, BentoGridItem } from '$lib/components/aceternity';
+	import Particles from '$lib/components/magic/Particles.svelte';
 	import { onMount } from 'svelte';
 
 	let BLUR_FADE_DELAY = 0.04;
@@ -60,6 +61,7 @@
 		<!-- Hero with Spotlight background -->
 		<div class="relative flex min-h-[80vh] items-center justify-center overflow-hidden">
 			<Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="hsl(45 100% 70% / 0.3)" />
+			<Particles className="opacity-40" />
 
 			<!-- Radial gradient overlay -->
 			<div class="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,hsl(240_6%_5%/0.8)_70%)]"></div>

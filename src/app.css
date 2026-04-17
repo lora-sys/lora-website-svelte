@@ -54,6 +54,7 @@
 	}
 	body {
 		@apply bg-background text-foreground font-sans antialiased;
+		scroll-behavior: smooth;
 	}
 	h1,
 	h2,
@@ -63,4 +64,31 @@
 	h6 {
 		@apply font-serif font-semibold tracking-tight;
 	}
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+	width: 6px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: hsl(45 100% 70% / 0.3);
+	border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: hsl(45 100% 70% / 0.5);
+}
+
+/* Text selection */
+::selection {
+	background: hsl(45 100% 70% / 0.3);
+	color: hsl(240 6% 5%);
+}
+
+/* Focus visible */
+:focus-visible {
+	outline: 2px solid hsl(45 100% 70% / 0.6);
+	outline-offset: 2px;
 }

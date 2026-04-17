@@ -20,7 +20,7 @@
 <ModeWatcher />
 <Tooltip.Provider>
 	<div
-		class="relative mx-auto min-h-screen max-w-2xl bg-background px-6 py-12 font-mono antialiased sm:py-24"
+		class="relative mx-auto min-h-screen max-w-5xl bg-background px-6 py-12 antialiased sm:py-24"
 	>
 		{@render children?.()}
 		<Navbar />

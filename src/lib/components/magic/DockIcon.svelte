@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
-	import { Motion, useMotionValue, useSpring, useTransform } from 'svelte-motion';
 
 	interface Props {
 		magnification?: number;
@@ -13,44 +12,39 @@
 	let {
 		magnification = 60,
 		distance = 160,
-		mouseX = 0,
+		mouseX = Infinity,
 		class: className = '',
 		children
 	}: Props = $props();
 
-	let mint = $state(useMotionValue(0));
+	let iconElement: HTMLDivElement | undefined = $state();
 
-	$effect(() => {
-		mint.set(mouseX);
-	});
-
-	let iconElement: HTMLDivElement = $state();
-
-	let distanceCalc = useTransform(mint, (val: number) => {
-		const bounds = iconElement?.getBoundingClientRect() ?? { x: 0, width: 0 };
-		return val - bounds.x - bounds.width / 2;
-	});
-
-	let widthSync = $derived(useTransform(distanceCalc, [-distance, 0, distance], [38, magnification, 38]));
-
-	let width = useSpring(widthSync, {
-		mass: 0.1,
-		stiffness: 150,
-		damping: 12
+	// Calculate distance from mouse and scale accordingly
+	let scale = $derived.by(() => {
+		if (!iconElement || mouseX === Infinity) return 1;
+		const rect = iconElement.getBoundingClientRect();
+		const iconCenterX = rect.left + rect.width / 2;
+		const dist = Math.abs(mouseX - iconCenterX);
+		const maxDist = distance;
+		const factor = Math.max(0, 1 - dist / maxDist);
+		// Scale from 1 to magnification/38 with factor
+		return 1 + (factor * (magnification - 38)) / 38;
 	});
 
 	let iconClass = $derived(cn(
-		'flex aspect-square cursor-pointer items-center justify-center rounded-full',
+		'flex aspect-square cursor-pointer items-center justify-center rounded-full transition-all duration-150 ease-out',
 		className
 	));
 
 	const children_render = $derived(children);
 </script>
 
-<Motion style={{ width: width }}>
-	{#snippet children({ motion })}
-		<div use:motion bind:this={iconElement} class={iconClass}>
-			{@render children_render?.()}
-		</div>
-	{/snippet}
-</Motion>
+<div
+	bind:this={iconElement}
+	class={iconClass}
+	style:transform="scale({scale})"
+	style:width="{scale * 38}px"
+	style:height="{scale * 38}px"
+>
+	{@render children_render?.()}
+</div>
