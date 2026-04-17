@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Badge from '$lib/components/ui/badge/badge.svelte';
 	import * as Avatar from '$lib/components/ui/avatar';
-	import { marked } from 'marked';
 	interface Props {
 		title: string;
 		description: string;
+		descriptionHtml?: string;
 		dates: string;
 		location: string;
 		image?: string;
@@ -15,13 +15,23 @@
 		}[];
 	}
 
-	let { title, description, dates, location, image = '', links = [] }: Props = $props();
+	let {
+		title,
+		description,
+		descriptionHtml,
+		dates,
+		location,
+		image = '',
+		links = []
+	}: Props = $props();
+
+	const renderedDescription = $derived(descriptionHtml ?? description);
 </script>
 
 <li class="relative ml-10 py-4">
 	<div class="absolute -left-16 top-2 flex items-center justify-center rounded-full bg-white">
 		<Avatar.Root class="m-auto size-12 border">
-			<Avatar.Image src={image} alt={title} class="object-contain" />
+			<Avatar.Image src={image} alt={title} class="object-contain" loading="lazy" />
 			<Avatar.Fallback>{title[0]}</Avatar.Fallback>
 		</Avatar.Root>
 	</div>
@@ -35,7 +45,7 @@
 		{/if}
 		{#if description}
 			<span class="prose text-sm text-muted-foreground dark:prose-invert">
-				{@html marked(description)}
+				{@html renderedDescription}
 			</span>
 		{/if}
 	</div>

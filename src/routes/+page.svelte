@@ -7,7 +7,6 @@
 	import * as Avatar from '$lib/components/ui/avatar';
 	import Badge from '$lib/components/ui/badge/badge.svelte';
 	import { DATA } from '$lib/data/resume';
-	import { marked } from 'marked';
 	import FavoritesSection from '$lib/components/portfolio/FavoriteSection.svelte';
 	let BLUR_FADE_DELAY = 0.04;
 </script>
@@ -52,7 +51,7 @@
 				</div>
 				<BlurFade delay={BLUR_FADE_DELAY}>
 					<Avatar.Root class="size-28 border">
-						<Avatar.Image alt={DATA.name} src={DATA.avatarUrl} />
+						<Avatar.Image alt={DATA.name} src={DATA.avatarUrl} loading="lazy" />
 						<Avatar.Fallback>{DATA.initials}</Avatar.Fallback>
 					</Avatar.Root>
 				</BlurFade>
@@ -67,7 +66,7 @@
 			<div
 				class="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert"
 			>
-				{@html marked(DATA.summary)}
+				{@html DATA.summaryHtml}
 			</div>
 		</BlurFade>
 	</section>
@@ -144,6 +143,7 @@
 							href={project.href}
 							title={project.title}
 							description={project.description}
+							descriptionHtml={project.descriptionHtml}
 							dates={project.dates}
 							tags={project.technologies}
 							image={project.image}
@@ -180,7 +180,15 @@
 				<ul class="mb-4 ml-4 divide-y divide-dashed border-l">
 					{#each DATA.hackathons as project}
 						<BlurFade delay={BLUR_FADE_DELAY}>
-							<HackathonCard {...project} />
+							<HackathonCard
+								title={project.title}
+								description={project.description}
+								descriptionHtml={project.descriptionHtml}
+								dates={project.dates}
+								location={project.location}
+								image={project.image}
+								links={project.links}
+							/>
 						</BlurFade>
 					{/each}
 				</ul>

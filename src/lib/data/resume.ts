@@ -13,6 +13,7 @@ import {
 	HeartIcon,
 	FilmIcon
 } from '@lucide/svelte';
+import { marked } from 'marked';
 // Navbar Icons
 import GithubSvg from '$lib/imgs/github.svg';
 import GithubDarkSvg from '$lib/imgs/github-dark.svg';
@@ -50,8 +51,13 @@ export const DATA = {
 	locationLink: 'https://www.google.com/maps/place/mumbai',
 	description:
 		'Software Engineer turned Entrepreneur. I love building things and helping people. Very active on Twitter.',
+	// Pre-compiled HTML from markdown summary — avoids runtime parsing on every render
+	summaryHtml: marked.parse(
+		'At the end of 2022, I quit my job as a software engineer to go fulltime into building and scaling my own SaaS businesses. In the past, [I pursued a double degree in computer science and business](/#education), [interned at big tech companies in Silicon Valley](https://www.youtube.com/watch?v=d-LJ2e5qKdE), and [competed in over 21 hackathons for fun](/#hackathons). I also had the pleasure of being a part of the first ever in-person cohort of buildspace called [buildspace sf1](https://buildspace.so/sf1).'
+	) as string,
+	// Legacy raw markdown field (kept for backwards compatibility)
 	summary:
-		'At the end of 2022, I quit my job as a software engineer to go fulltime into building and scaling my own SaaS businesses. In the past, [I pursued a double degree in computer science and business](/#education), [interned at big tech companies in Sil// icon Valley](https://www.youtube.com/watch?v=d-LJ2e5qKdE), and [competed in over 21 hackathons for fun](/#hackathons). I also had the pleasure of being a part of the first ever in-person cohort of buildspace called [buildspace sf1](https://buildspace.so/sf1).',
+		'At the end of 2022, I quit my job as a software engineer to go fulltime into building and scaling my own SaaS businesses. In the past, [I pursued a double degree in computer science and business](/#education), [interned at big tech companies in Silicon Valley](https://www.youtube.com/watch?v=d-LJ2e5qKdE), and [competed in over 21 hackathons for fun](/#hackathons). I also had the pleasure of being a part of the first ever in-person cohort of buildspace called [buildspace sf1](https://buildspace.so/sf1).',
 	avatarUrl: 'https://i.pinimg.com/564x/df/d2/76/dfd276448eed0f2b6094d1cb2c9d0269.jpg',
 	skills: [
 		'Svelte',
@@ -278,6 +284,9 @@ export const DATA = {
 			href: 'https://chatcollect.com',
 			dates: 'Jan 2024 - Feb 2024',
 			active: true,
+			descriptionHtml: marked.parse(
+				'With the release of the [OpenAI GPT Store](https://openai.com/blog/introducing-the-gpt-store), I decided to build a SaaS which allows users to collect email addresses from their GPT users. This is a great way to build an audience and monetize your GPT API usage.'
+			) as string,
 			description:
 				'With the release of the [OpenAI GPT Store](https://openai.com/blog/introducing-the-gpt-store), I decided to build a SaaS which allows users to collect email addresses from their GPT users. This is a great way to build an audience and monetize your GPT API usage.',
 			technologies: [
@@ -306,6 +315,9 @@ export const DATA = {
 			href: 'https://magicui.design',
 			dates: 'June 2023 - Present',
 			active: true,
+			descriptionHtml: marked.parse(
+				'Designed, developed and sold animated UI components for developers.'
+			) as string,
 			description: 'Designed, developed and sold animated UI components for developers.',
 			technologies: [
 				'Next.js',
@@ -339,6 +351,9 @@ export const DATA = {
 			href: 'https://llm.report',
 			dates: 'April 2023 - September 2023',
 			active: true,
+			descriptionHtml: marked.parse(
+				'Developed an open-source logging and analytics platform for OpenAI: Log your ChatGPT API requests, analyze costs, and improve your prompts.'
+			) as string,
 			description:
 				'Developed an open-source logging and analytics platform for OpenAI: Log your ChatGPT API requests, analyze costs, and improve your prompts.',
 			technologies: [
@@ -374,6 +389,9 @@ export const DATA = {
 			href: 'https://automatic.chat',
 			dates: 'April 2023 - March 2024',
 			active: true,
+			descriptionHtml: marked.parse(
+				'Developed an AI Customer Support Chatbot which automatically responds to customer support tickets using the latest GPT models.'
+			) as string,
 			description:
 				'Developed an AI Customer Support Chatbot which automatically responds to customer support tickets using the latest GPT models.',
 			technologies: [
@@ -607,6 +625,9 @@ export const DATA = {
 			title: 'Global AI Hackathon - Toronto',
 			dates: 'June 23rd - 25th, 2017',
 			location: 'Toronto, Ontario',
+			descriptionHtml: marked.parse(
+				'Developed a python library which can be imported to any python game and change difficulty of the game based on real time emotion of player. Uses OpenCV and webcam for facial recognition, and a custom Machine Learning Model trained on a [Kaggle Emotion Dataset](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/leaderboard) using [Tensorflow](https://www.tensorflow.org/Tensorflow) and [Keras](https://keras.io/). This project recieved 1st place prize at the Global AI Hackathon - Toronto and was also invited to demo at [NextAI Canada](https://www.nextcanada.com/next-ai).'
+			) as string,
 			description:
 				'Developed a python library which can be imported to any python game and change difficulty of the game based on real time emotion of player. Uses OpenCV and webcam for facial recognition, and a custom Machine Learning Model trained on a [Kaggle Emotion Dataset](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/leaderboard) using [Tensorflow](https://www.tensorflow.org/Tensorflow) and [Keras](https://keras.io/). This project recieved 1st place prize at the Global AI Hackathon - Toronto and was also invited to demo at [NextAI Canada](https://www.nextcanada.com/next-ai).',
 			image: 'https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/global-ai-hackathon.jpg',

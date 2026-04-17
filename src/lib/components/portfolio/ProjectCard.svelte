@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { marked } from 'marked';
 	import Badge from '../ui/badge/badge.svelte';
 
 	interface Props {
@@ -7,6 +6,7 @@
 		title: string;
 		href?: string;
 		description: string;
+		descriptionHtml?: string;
 		dates: string;
 		tags: readonly string[];
 		link?: string;
@@ -20,6 +20,7 @@
 		title,
 		href = '',
 		description,
+		descriptionHtml,
 		dates,
 		tags,
 		link = '',
@@ -41,9 +42,12 @@
 				autoplay
 				loop
 				muted
+				playsinline
+				preload="none"
+				aria-hidden="true"
 			></video>
 		{:else}
-			<img class="h-40 w-full overflow-hidden object-cover object-top" src={image} alt={title} />
+			<img class="h-40 w-full overflow-hidden object-cover object-top" src={image} alt={title} loading="lazy" />
 		{/if}
 	</a>
 	<!-- Card Header -->
@@ -58,7 +62,7 @@
 			<div
 				class="prose max-w-full text-pretty font-sans text-xs text-muted-foreground dark:prose-invert"
 			>
-				{@html marked(description)}
+				{@html descriptionHtml}
 			</div>
 		</div>
 	</div>

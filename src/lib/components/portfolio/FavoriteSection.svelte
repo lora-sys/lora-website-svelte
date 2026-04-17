@@ -33,6 +33,8 @@
 											src={item.background}
 											alt={item.name}
 											class="absolute inset-0 h-full w-full object-cover"
+											loading="lazy"
+											decoding="async"
 										/>
 									{/snippet}
 								</BentoCard>
@@ -70,6 +72,8 @@
 								src={item.background}
 								alt={item.name}
 								class="absolute inset-0 h-full w-full object-cover"
+								loading="lazy"
+								decoding="async"
 							/>
 						{/snippet}
 					</BentoCard>

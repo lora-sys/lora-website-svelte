@@ -20,7 +20,7 @@
 							<Lens {zoomFactor} {lensSize}>
 								{#snippet children()}
 									<div class="relative aspect-[3/4] overflow-hidden rounded-xl">
-										<img src={anime.image} alt={anime.name} class="h-full w-full object-cover" />
+										<img src={anime.image} alt={anime.name} class="h-full w-full object-cover" loading="lazy" decoding="async" />
 									</div>
 								{/snippet}
 							</Lens>

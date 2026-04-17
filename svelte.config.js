@@ -3,17 +3,44 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 import { mdsvex, escapeSvelte } from 'mdsvex';
 import { createHighlighter } from 'shiki';
+
+const SUPPORTED_LANGS = [
+	'javascript',
+	'typescript',
+	'svelte',
+	'py',
+	'python',
+	'tsx',
+	'jsx',
+	'bash',
+	'shell',
+	'json',
+	'css',
+	'html',
+	'markdown',
+	'yaml',
+	'rust',
+	'go'
+];
+
+let _highlighter = null;
+async function getHighlighter() {
+	if (!_highlighter) {
+		_highlighter = await createHighlighter({
+			themes: ['vesper'],
+			langs: SUPPORTED_LANGS
+		});
+	}
+	return _highlighter;
+}
+
 const mdsvexOptions = {
 	extensions: ['.md'],
 	highlight: {
 		highlighter: async (code, lang = 'text') => {
-			const highlighter = await createHighlighter({
-				themes: ['vesper'],
-				langs: ['javascript', 'typescript', 'svelte', 'py', 'python']
-			});
-			await highlighter.loadLanguage('javascript', 'typescript', 'svelte', 'py', 'python');
-			await highlighter.loadTheme('vesper');
-			const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'vesper' }));
+			const highlighter = await getHighlighter();
+			const validLang = SUPPORTED_LANGS.includes(lang) ? lang : 'text';
+			const html = escapeSvelte(highlighter.codeToHtml(code, { lang: validLang, theme: 'vesper' }));
 			return `{@html \`${html}\` }`;
 		}
 	}

@@ -11,6 +11,12 @@
 	setMode('dark');
 </script>
 
+<svelte:head>
+	<link rel="preconnect" href="https://i.pinimg.com" />
+	<link rel="preconnect" href="https://pub-83c5db439b40468498f97946200806f7.r2.dev" />
+	<link rel="preconnect" href="https://cdn.magicui.design" />
+</svelte:head>
+
 <ModeWatcher />
 <Tooltip.Provider>
 	<div

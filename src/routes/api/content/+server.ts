@@ -4,15 +4,13 @@ import type { Post } from '$lib/types';
 async function getPosts() {
 	let posts: Post[] = [];
 
-	const paths = import.meta.glob('/src/content/*.md', { eager: true });
-	// console.log('paths', paths);
+	const paths = import.meta.glob('/src/content/*.md');
 	for (const path in paths) {
-		const file = paths[path];
+		const module = (await paths[path]()) as { metadata?: Omit<Post, 'slug'> };
 		const slug = path.split('/').at(-1)?.replace('.md', '');
 
-		if (file && typeof file === 'object' && 'metadata' in file && slug) {
-			const metadata = file.metadata as Omit<Post, 'slug'>;
-			const post = { ...metadata, slug } satisfies Post;
+		if (module?.metadata && slug) {
+			const post = { ...module.metadata, slug } satisfies Post;
 			post.published && posts.push(post);
 		}
 	}
