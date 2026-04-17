@@ -6,17 +6,44 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Personal portfolio website for Sikandar Bhide (lora-sys), built with SvelteKit 2, Svelte 5, and TypeScript. Inspired by Magic UI portfolio template.
 
-## Common Commands
+## Package Manager
+
+**Use pnpm as the package manager.** All commands should use `pnpm` instead of `npm`/`yarn`/`bun`.
 
 ```bash
-npm run dev        # Start dev server
-npm run build      # Build for production
-npm run preview    # Preview production build
-npm run check      # Type-check (svelte-kit sync + svelte-check)
-npm run check:watch # Watch mode type-checking
-npm run lint       # Run prettier + eslint
-npm run format     # Auto-format all files
+pnpm install       # Install dependencies
+pnpm run dev       # Start dev server
+pnpm run build     # Build for production
+pnpm run preview   # Preview production build
+pnpm run check     # Type-check (svelte-kit sync + svelte-check)
+pnpm run check:watch # Watch mode type-checking
+pnpm run lint      # Run prettier + eslint
+pnpm run format    # Auto-format all files
 ```
+
+## Development Workflow
+
+### 1. Analysis
+Understand requirements, explore codebase, identify affected areas.
+
+### 2. Plan
+Create a phased implementation plan. Break work into self-contained phases. Present plan to user for approval before proceeding.
+
+### 3. Execute Phase
+For each phase:
+1. Make code changes
+2. Run `pnpm run build` to verify no build errors
+3. Start dev server
+4. Use **agent-browser** to verify page load and runtime behavior:
+   - `agent-browser open <url>` → open the page
+   - `agent-browser console --level error` → check for errors
+   - `agent-browser screenshot <path>` → capture visual
+5. Fix any issues found
+6. Git commit the phase: `git add -A && git commit -m "<type>: <description>"`
+7. Proceed to next phase
+
+### 4. Final Delivery
+After all phases complete, push all commits: `git push`
 
 ## Architecture
 
@@ -55,8 +82,8 @@ Blog posts are Markdown files in `src/content/` with YAML frontmatter (`title`, 
 
 ## Verification First
 
-- After any code modification, **must** run `npm test`.
-- For UI changes, **must** use `screenshot` tool for comparison.
+- After any code modification, **must** run `pnpm run build`.
+- For UI changes, **must** use **agent-browser** for page load and runtime analysis.
 
 ## Code Style Constraints
 
@@ -65,12 +92,13 @@ Blog posts are Markdown files in `src/content/` with YAML frontmatter (`title`, 
 
 ## Tool Flow Configuration
 
-- Build command: `npm run build`
-- Type check: `tsc --noEmit`
+- Build command: `pnpm run build`
+- Type check: `pnpm run check`
 
 ## Failure Self-Healing Path
 
 - If build fails, read `docs/error-codes.md` first before attempting fixes.
 - If a test fails, run `node scripts/analyze.js` first to identify the source of the error.
 - Suspend changing service code until the source of error is confirmed.
+- For runtime errors, use **agent-browser** to reproduce: open the page, run `console --level error`, take a screenshot.
 
