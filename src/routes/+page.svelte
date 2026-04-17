@@ -10,6 +10,7 @@
 	import FavoritesSection from '$lib/components/portfolio/FavoriteSection.svelte';
 	import { Spotlight } from '$lib/components/aceternity';
 	import { TextGenerateEffect } from '$lib/components/aceternity';
+	import { BentoGrid, BentoGridItem } from '$lib/components/aceternity';
 	import { onMount } from 'svelte';
 
 	let BLUR_FADE_DELAY = 0.04;
@@ -192,14 +193,16 @@
 		</div>
 	</section>
 	<section id="skills">
-		<div class="flex min-h-0 flex-col gap-y-3">
+		<div class="w-full space-y-8">
 			<BlurFade delay={BLUR_FADE_DELAY}>
-				<h2 class="text-xl font-bold">Skills</h2>
+				<h2 class="font-serif text-3xl font-bold tracking-tight">Skills & Technologies</h2>
 			</BlurFade>
-			<div class="flex flex-wrap gap-1">
+			<div class="flex flex-wrap gap-2">
 				{#each DATA.skills as skill, id}
 					<BlurFade delay={BLUR_FADE_DELAY * id + 0.002}>
-						<Badge>{skill}</Badge>
+						<Badge class="rounded-lg border border-border/50 bg-card px-3 py-1 text-sm font-medium transition-all duration-300 hover:border-gold/40 hover:text-gold hover:shadow-[0_0_15px_hsl(45_100%_70%_/0.1)]">
+							{skill}
+						</Badge>
 					</BlurFade>
 				{/each}
 			</div>
@@ -213,35 +216,60 @@
 						<div class="inline-block rounded-lg bg-foreground px-3 py-1 text-sm text-background">
 							My Projects
 						</div>
-						<h2 class="text-3xl font-bold tracking-tighter sm:text-5xl">
+						<h2 class="font-serif text-4xl font-bold tracking-tight sm:text-5xl">
 							Check out my latest work
 						</h2>
-						<p
-							class="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed"
-						>
+						<p class="mx-auto max-w-2xl text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
 							I&apos;ve worked on a variety of projects, from simple websites to complex web
 							applications. Here are a few of my favorites.
 						</p>
 					</div>
 				</div>
 			</BlurFade>
-			<div class="mx-auto grid max-w-[800px] grid-cols-1 gap-3 sm:grid-cols-2">
+
+			<!-- Bento Grid for Projects -->
+			<BentoGrid className="mx-auto max-w-5xl">
 				{#each DATA.projects as project, id}
-					<BlurFade delay={BLUR_FADE_DELAY * 1.5 + id * 0.05}>
-						<ProjectCard
-							href={project.href}
-							title={project.title}
-							description={project.description}
-							descriptionHtml={project.descriptionHtml}
-							dates={project.dates}
-							tags={project.technologies}
-							image={project.image}
-							video={project.video}
-							links={project.links}
-						/>
-					</BlurFade>
+					<BentoGridItem
+						title={project.title}
+						description={project.description}
+						className={id === 0 ? 'md:col-span-2' : ''}
+					>
+						{#snippet header()}
+							<a href={project.href || '#'} class="block cursor-pointer overflow-hidden rounded-t-xl">
+								{#if project.video}
+									<video
+										class="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+										src={project.video}
+										autoplay loop muted playsinline preload="none"
+									></video>
+								{:else}
+									<img
+										class="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+										src={project.image}
+										alt={project.title}
+										loading="lazy"
+									/>
+								{/if}
+							</a>
+						{/snippet}
+						{#snippet icon()}
+							<div class="flex flex-wrap gap-1">
+								{#each project.technologies.slice(0, 4) as tag}
+									<Badge class="rounded-[4px] border border-border/50 bg-card px-2 py-0.5 text-[10px]">
+										{tag}
+									</Badge>
+								{/each}
+								{#if project.technologies.length > 4}
+									<Badge class="rounded-[4px] border border-border/50 bg-card px-2 py-0.5 text-[10px] text-muted-foreground">
+										+{project.technologies.length - 4}
+									</Badge>
+								{/if}
+							</div>
+						{/snippet}
+					</BentoGridItem>
 				{/each}
-			</div>
+			</BentoGrid>
 		</div>
 	</section>
 	<section id="hackathons">
