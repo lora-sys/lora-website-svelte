@@ -12,20 +12,15 @@
 	<title>{data.meta.title}</title>
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content={data.meta.title} />
-	<script type="application/ld+json">
-		{JSON.stringify({
-			"@context": "https://schema.org",
-			"@type": "BlogPosting",
-			"headline": data.meta.title,
-			"datePublished": data.meta.date,
-			"description": data.meta.description,
-			"keywords": data.meta.categories?.join(', '),
-			"author": {
-				"@type": "Person",
-				"name": "lora-sys"
-			}
-		})}
-	</script>
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "BlogPosting",
+		"headline": data.meta.title,
+		"datePublished": data.meta.date,
+		"description": data.meta.description,
+		"keywords": data.meta.categories?.join(', '),
+		"author": { "@type": "Person", "name": "lora-sys" }
+	})}</script>`}
 </svelte:head>
 
 <div class="-mt-10">
