@@ -14,8 +14,7 @@
 		keywords: data.meta?.categories?.join(', ') ?? '',
 		author: { '@type': 'Person', name: 'lora-sys' }
 	});
-	const ldJsonTag =
-		'<script type="application/ld+json">' + ldJson + '</' + 'script>';
+	const ldJsonTag = '<script type="application/ld+json">' + ldJson + '</' + 'script>';
 </script>
 
 <!-- SEO -->

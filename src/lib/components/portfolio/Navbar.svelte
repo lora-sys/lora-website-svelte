@@ -2,10 +2,9 @@
 	import { DATA } from '$lib/data/resume';
 	import Dock from '../magic/Dock.svelte';
 	import DockIcon from '../magic/DockIcon.svelte';
-	import * as Tooltip from '$lib/components/ui/tooltip';
+	import DockTooltip from '../magic/DockTooltip.svelte';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import ModeToggle from './ModeToggle.svelte';
-	import Button from '$lib/components/ui/button/button.svelte';
 </script>
 
 <div
@@ -20,17 +19,14 @@
 		{#snippet children({ magnification, distance, mouseX })}
 			{#each DATA.navbar as item}
 				<DockIcon {magnification} {mouseX} {distance}>
-					<Tooltip.Root openDelay={300}>
-						<Tooltip.Trigger>
-							<Button href={item.href} variant="ghost" size="icon" class="size-12 rounded-full">
-								<!-- <item.icon class="size-4" /> -->
-								<item.icon class="size-[18px]" strokeWidth={1.5} />
-							</Button>
-						</Tooltip.Trigger>
-						<Tooltip.Content>
-							<p>{item.label}</p>
-						</Tooltip.Content>
-					</Tooltip.Root>
+					<DockTooltip label={item.label} class="contents">
+						<a
+							href={item.href}
+							class="flex size-12 items-center justify-center rounded-full transition-colors hover:bg-accent hover:text-accent-foreground"
+						>
+							<item.icon class="size-[18px]" strokeWidth={1.5} />
+						</a>
+					</DockTooltip>
 				</DockIcon>
 			{/each}
 			<Separator orientation="vertical" class="h-full" />
@@ -38,21 +34,25 @@
 				.filter(([_, social]) => social.navbar)
 				.map(([_, social]) => social) as social}
 				<DockIcon {magnification} {mouseX} {distance}>
-					<Tooltip.Root openDelay={300}>
-						<Tooltip.Trigger>
-							<Button href={social.url} variant="ghost" size="icon" class="size-12 rounded-full">
-								{#if social?.dark_icon}
-									<img src={social.icon} class="size-[18px] dark:hidden" alt={social.name} />
-									<img src={social.dark_icon} class="hidden size-4 dark:block" alt={social.name} />
-								{:else}
-									<img src={social.icon} class="size-[18px]" alt={social.name} />
-								{/if}
-							</Button>
-						</Tooltip.Trigger>
-						<Tooltip.Content>
-							<p>{social.name}</p>
-						</Tooltip.Content>
-					</Tooltip.Root>
+					<DockTooltip label={social.name} class="contents">
+						<a
+							href={social.url}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="flex size-12 items-center justify-center rounded-full transition-colors hover:bg-accent hover:text-accent-foreground"
+						>
+							{#if social?.dark_icon}
+								<img src={social.icon} class="size-[18px] dark:hidden" alt={social.name} />
+								<img
+									src={social.dark_icon}
+									class="hidden size-[18px] dark:block"
+									alt={social.name}
+								/>
+							{:else}
+								<img src={social.icon} class="size-[18px]" alt={social.name} />
+							{/if}
+						</a>
+					</DockTooltip>
 				</DockIcon>
 			{/each}
 			<Separator orientation="vertical" class="h-full py-2" />
