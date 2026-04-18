@@ -3,6 +3,17 @@
 	import '../app.css';
 	import { ModeWatcher, setMode } from 'mode-watcher';
 	import * as Tooltip from '$lib/components/ui/tooltip';
+	import '@fontsource/poppins/400.css';
+	import '@fontsource/poppins/500.css';
+	import '@fontsource/poppins/600.css';
+	import '@fontsource/poppins/700.css';
+	import '@fontsource/poppins/800.css';
+	import '@fontsource/lora/400.css';
+	import '@fontsource/lora/500.css';
+	import '@fontsource/lora/600.css';
+	import '@fontsource/lora/400-italic.css';
+	import '@fontsource/lora/500-italic.css';
+	import '@fontsource/fragment-mono/400.css';
 	interface Props {
 		children?: import('svelte').Snippet;
 	}

@@ -13,6 +13,9 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
+		"@fontsource/fragment-mono": "^5.2.8",
+		"@fontsource/lora": "^5.2.8",
+		"@fontsource/poppins": "^5.2.7",
 		"@lucide/svelte": "^0.482.0",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/enhanced-img": "^0.3.9",
