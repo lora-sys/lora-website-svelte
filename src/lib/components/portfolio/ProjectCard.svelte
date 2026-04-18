@@ -2,28 +2,22 @@
 	import Badge from '../ui/badge/badge.svelte';
 
 	interface Props {
-		class?: string;
 		title: string;
 		href?: string;
-		description: string;
 		descriptionHtml?: string;
 		dates: string;
 		tags: readonly string[];
-		link?: string;
 		image?: string;
 		video?: string;
 		links?: { icon: any; type: string; href: string }[];
 	}
 
 	let {
-		class: _class = '',
 		title,
 		href = '',
-		description,
 		descriptionHtml,
 		dates,
 		tags,
-		link = '',
 		image = '',
 		video = '',
 		links = []

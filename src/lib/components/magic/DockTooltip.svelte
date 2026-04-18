@@ -9,12 +9,29 @@
 
 	let show = $state(false);
 	let triggerEl: HTMLDivElement | undefined = $state();
+	let tooltipStyle = $state('');
+	let hideTimer: ReturnType<typeof setTimeout>;
 
-	let tooltipStyle = $derived.by(() => {
-		if (!triggerEl || !show) return '';
+	function handleEnter() {
+		clearTimeout(hideTimer);
+		show = true;
+		updatePosition();
+	}
+
+	function handleLeave() {
+		hideTimer = setTimeout(() => (show = false), 50);
+	}
+
+	function updatePosition() {
+		if (!triggerEl || !show) return;
 		const rect = triggerEl.getBoundingClientRect();
-		const top = rect.top - 8;
-		return `position: fixed; left: ${rect.left + rect.width / 2}px; top: ${top}px; transform: translateX(-50%) translateY(-100%);`;
+		tooltipStyle = `position: fixed; left: ${rect.left + rect.width / 2}px; top: ${rect.top - 8}px; transform: translateX(-50%) translateY(-100%);`;
+	}
+
+	$effect(() => {
+		if (triggerEl && show) {
+			updatePosition();
+		}
 	});
 </script>
 
@@ -22,10 +39,10 @@
 <div
 	bind:this={triggerEl}
 	class={className}
-	onmouseenter={() => (show = true)}
-	onmouseleave={() => (show = false)}
-	onfocus={() => (show = true)}
-	onblur={() => (show = false)}
+	onmouseenter={handleEnter}
+	onmouseleave={handleLeave}
+	onfocus={handleEnter}
+	onblur={handleLeave}
 >
 	{@render children?.()}
 	{#if show}

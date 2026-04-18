@@ -9,7 +9,6 @@
 		logoUrl?: string;
 		company?: string;
 		title?: string;
-		subtitle?: string;
 		href?: string;
 		badges?: string[];
 		description?: string;
@@ -21,7 +20,6 @@
 		logoUrl = '',
 		company = '',
 		title = '',
-		subtitle = '',
 		href = '',
 		badges = [''],
 		description = '',

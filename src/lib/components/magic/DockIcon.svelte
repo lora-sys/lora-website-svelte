@@ -37,8 +37,6 @@
 			className
 		)
 	);
-
-	const children_render = $derived(children);
 </script>
 
 <div
@@ -48,5 +46,5 @@
 	style:width="{scale * 38}px"
 	style:height="{scale * 38}px"
 >
-	{@render children_render?.()}
+	{@render children?.()}
 </div>

@@ -45,8 +45,6 @@
 			'items-end': direction === 'bottom'
 		})
 	);
-
-	const children_render = $derived(children);
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -57,7 +55,7 @@
 	class={dockClass}
 	data-mouse-x={mouseX}
 >
-	{#if children_render}{@render children_render({ mouseX, magnification, distance })}{:else}
+	{#if children}{@render children({ mouseX, magnification, distance })}{:else}
 		Default
 	{/if}
 </div>

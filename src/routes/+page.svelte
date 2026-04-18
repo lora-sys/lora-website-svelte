@@ -2,7 +2,6 @@
 	import BlurFade from '$lib/components/magic/BlurFade.svelte';
 	import AnimeSection from '$lib/components/portfolio/AnimeSection.svelte';
 	import HackathonCard from '$lib/components/portfolio/HackathonCard.svelte';
-	import ProjectCard from '$lib/components/portfolio/ProjectCard.svelte';
 	import ResumeCard from '$lib/components/portfolio/ResumeCard.svelte';
 	import * as Avatar from '$lib/components/ui/avatar';
 	import Badge from '$lib/components/ui/badge/badge.svelte';
@@ -201,8 +200,7 @@
 						href={edu.href}
 						logoUrl={edu.logoUrl}
 						company={edu.school}
-						title={edu.school}
-						subtitle={edu.degree}
+						title={edu.degree}
 						start={edu.start}
 						end={edu.end}
 					/>
