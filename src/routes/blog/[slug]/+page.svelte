@@ -23,7 +23,13 @@
 		tempDiv.innerHTML = data.content;
 		const headings = tempDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
 		return Array.from(headings).map((h) => ({
-			id: h.id || h.textContent?.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') || '',
+			id:
+				h.id ||
+				h.textContent
+					?.toLowerCase()
+					.replace(/\s+/g, '-')
+					.replace(/[^\w-]/g, '') ||
+				'',
 			text: h.textContent || '',
 			level: parseInt(h.tagName.charAt(1))
 		}));
@@ -81,13 +87,13 @@
 
 	<!-- Table of Contents -->
 	{#if toc.length > 0}
-		<div class="mb-8 p-6 rounded-xl border border-border bg-card/50">
-			<h2 class="text-lg font-semibold mb-4 text-foreground">Table of Contents</h2>
+		<div class="mb-8 rounded-xl border border-border bg-card/50 p-6">
+			<h2 class="mb-4 text-lg font-semibold text-foreground">Table of Contents</h2>
 			<nav class="space-y-2">
 				{#each toc as heading}
 					<a
 						href="#{heading.id}"
-						class="block text-sm text-muted-foreground hover:text-blue-600 dark:hover:text-gold transition-colors duration-200 hover:bg-blue-50 dark:hover:bg-gold/5 rounded px-2 py-1 -mx-2"
+						class="-mx-2 block rounded px-2 py-1 text-sm text-muted-foreground transition-colors duration-200 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-gold/5 dark:hover:text-gold"
 						style="padding-left: {(heading.level - 1) * 1}rem;"
 					>
 						{heading.text}
@@ -105,12 +111,12 @@
 			dark:prose-invert prose-headings:font-sans prose-headings:tracking-tight
 			prose-h1:text-3xl prose-h2:text-2xl
 			prose-h3:text-xl prose-p:text-base prose-p:leading-relaxed
-			prose-a:no-underline hover:prose-a:underline
-			prose-blockquote:border-l-gold prose-blockquote:text-muted-foreground
-			prose-pre:border prose-pre:border-border
+			prose-a:text-blue-600 prose-a:no-underline
+			hover:prose-a:underline prose-blockquote:border-l-gold
+			prose-blockquote:text-muted-foreground prose-pre:border
+			prose-pre:border-border
 			prose-img:rounded-xl
-			prose-img:shadow-lg
-			prose-a:text-blue-600 dark:prose-a:text-gold"
+			prose-img:shadow-lg dark:prose-a:text-gold"
 	>
 		<data.content />
 	</article>
@@ -118,7 +124,10 @@
 	<!-- Footer -->
 	<Separator class="border-border/50" />
 	<div class="flex items-center justify-between text-sm text-muted-foreground">
-		<a href="/blog" class="flex items-center gap-1 transition-colors hover:text-blue-600 dark:hover:text-gold">
+		<a
+			href="/blog"
+			class="flex items-center gap-1 transition-colors hover:text-blue-600 dark:hover:text-gold"
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="14"

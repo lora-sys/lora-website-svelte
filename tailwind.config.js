@@ -59,7 +59,8 @@ const config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: ['"Poppins"', ...fontFamily.sans],
+				sans: ['"Space Grotesk"', ...fontFamily.sans],
+				heading: ['"Syne"', ...fontFamily.sans],
 				serif: ['"Lora"', ...fontFamily.serif],
 				mono: ['"Fragment Mono"', ...fontFamily.mono]
 			}

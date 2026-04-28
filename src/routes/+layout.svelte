@@ -3,8 +3,8 @@
 	import '../app.css';
 	import { ModeWatcher, setMode } from 'mode-watcher';
 	import * as Tooltip from '$lib/components/ui/tooltip';
-	import '@fontsource/poppins/index.css';
-	import '@fontsource/lora/index.css';
+	import '@fontsource/space-grotesk/index.css';
+	import '@fontsource/syne/index.css';
 	interface Props {
 		children?: import('svelte').Snippet;
 	}
@@ -15,7 +15,8 @@
 	// Register Service Worker
 	if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
 		window.addEventListener('load', () => {
-			navigator.serviceWorker.register('/sw.js')
+			navigator.serviceWorker
+				.register('/sw.js')
 				.then((registration) => {
 					console.log('✅ Service Worker registered successfully');
 				})

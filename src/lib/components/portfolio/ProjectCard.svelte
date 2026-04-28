@@ -88,7 +88,7 @@
 			<div class="mt-3 flex flex-wrap gap-1">
 				{#each tags as tag}
 					<Badge
-						class="rounded-[4px] border border-border/50 bg-card text-card-foreground px-2 py-0.5 text-[10px] transition-colors duration-300 hover:border-gold/40 hover:text-gold"
+						class="rounded-[4px] border border-border/50 bg-card px-2 py-0.5 text-[10px] text-card-foreground transition-colors duration-300 hover:border-gold/40 hover:text-gold"
 					>
 						{tag}
 					</Badge>

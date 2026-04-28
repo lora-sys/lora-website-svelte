@@ -61,12 +61,22 @@
 		<div class="relative flex min-h-[90vh] items-center justify-center overflow-hidden">
 			<!-- Parallax layers -->
 			<div class="absolute inset-0 z-0">
-				<div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"></div>
-				<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
-				<div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+				<div
+					class="absolute left-0 top-0 h-full w-full bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"
+				></div>
+				<div
+					class="absolute left-1/4 top-1/4 h-96 w-96 animate-pulse rounded-full bg-primary/10 blur-3xl"
+				></div>
+				<div
+					class="absolute bottom-1/4 right-1/4 h-80 w-80 animate-pulse rounded-full bg-accent/10 blur-3xl"
+					style="animation-delay: 2s;"
+				></div>
 			</div>
 
-			<Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="hsl(var(--primary) / 0.15)" />
+			<Spotlight
+				className="-top-40 left-0 md:left-60 md:-top-20"
+				fill="hsl(var(--primary) / 0.15)"
+			/>
 			<Particles className="opacity-30" />
 
 			<!-- Radial gradient overlay -->
@@ -113,11 +123,11 @@
 						<!-- Enhanced magnetic avatar -->
 						<div bind:this={avatarEl} class="group/avatar relative cursor-pointer">
 							<div
-								class="transition-all duration-500 ease-out group-hover/avatar:scale-110 group-hover/avatar:rotate-3"
+								class="transition-all duration-500 ease-out group-hover/avatar:rotate-3 group-hover/avatar:scale-110"
 								style="transform: translate({mouseX}px, {mouseY}px)"
 							>
 								<Avatar.Root
-									class="size-36 border-2 border-primary/30 shadow-[0_0_40px_hsl(var(--primary)/0.3)] sm:size-44 transition-all duration-300 group-hover/avatar:shadow-[0_0_60px_hsl(var(--primary)/0.5)]"
+									class="size-36 border-2 border-primary/30 shadow-[0_0_40px_hsl(var(--primary)/0.3)] transition-all duration-300 group-hover/avatar:shadow-[0_0_60px_hsl(var(--primary)/0.5)] sm:size-44"
 								>
 									<Avatar.Image alt={DATA.name} src={DATA.avatarUrl} />
 									<Avatar.Fallback
@@ -129,14 +139,22 @@
 							</div>
 							<!-- Enhanced glow ring -->
 							<div
-								class="absolute inset-0 rounded-full opacity-0 transition-all duration-500 group-hover/avatar:opacity-100 group-hover/avatar:scale-125"
+								class="absolute inset-0 rounded-full opacity-0 transition-all duration-500 group-hover/avatar:scale-125 group-hover/avatar:opacity-100"
 								style="background: radial-gradient(circle, hsl(var(--primary)/0.2) 0%, transparent 70%);"
 							></div>
 							<!-- Floating particles around avatar -->
-							<div class="absolute inset-0 pointer-events-none">
-								<div class="absolute top-2 left-2 w-2 h-2 bg-primary/40 rounded-full animate-ping"></div>
-								<div class="absolute top-4 right-3 w-1 h-1 bg-accent/40 rounded-full animate-ping" style="animation-delay: 1s;"></div>
-								<div class="absolute bottom-3 left-4 w-1.5 h-1.5 bg-primary/30 rounded-full animate-ping" style="animation-delay: 2s;"></div>
+							<div class="pointer-events-none absolute inset-0">
+								<div
+									class="absolute left-2 top-2 h-2 w-2 animate-ping rounded-full bg-primary/40"
+								></div>
+								<div
+									class="absolute right-3 top-4 h-1 w-1 animate-ping rounded-full bg-accent/40"
+									style="animation-delay: 1s;"
+								></div>
+								<div
+									class="absolute bottom-3 left-4 h-1.5 w-1.5 animate-ping rounded-full bg-primary/30"
+									style="animation-delay: 2s;"
+								></div>
 							</div>
 						</div>
 					</div>
@@ -149,10 +167,12 @@
 								href={link.url}
 								target="_blank"
 								rel="noopener noreferrer"
-								class="group relative rounded-full border border-border/50 bg-card/50 px-6 py-3 text-sm font-medium transition-all duration-300 hover:border-primary/50 hover:bg-primary/5 hover:text-primary hover:shadow-[0_0_20px_hsl(var(--primary)/0.1)] hover:scale-105 focus-visible:ring-2 focus-visible:ring-primary/50 backdrop-blur-sm"
+								class="group relative rounded-full border border-border/50 bg-card/50 px-6 py-3 text-sm font-medium backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-primary/50 hover:bg-primary/5 hover:text-primary hover:shadow-[0_0_20px_hsl(var(--primary)/0.1)] focus-visible:ring-2 focus-visible:ring-primary/50"
 							>
 								<span class="relative z-10">{link.name}</span>
-								<div class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-primary/10 to-accent/10"></div>
+								<div
+									class="absolute inset-0 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+								></div>
 							</a>
 						{/each}
 					</div>
@@ -163,12 +183,14 @@
 			<BlurFade delay={BLUR_FADE_DELAY * 8} yOffset={4}>
 				<div class="absolute bottom-8 left-1/2 -translate-x-1/2">
 					<div class="flex flex-col items-center gap-2 text-muted-foreground/60">
-						<span class="text-xs font-medium tracking-wider uppercase">Scroll</span>
+						<span class="text-xs font-medium uppercase tracking-wider">Scroll</span>
 						<div class="relative">
-							<div class="w-6 h-10 border-2 border-current rounded-full flex justify-center">
-								<div class="w-1 h-3 bg-current rounded-full mt-2 animate-bounce"></div>
+							<div class="flex h-10 w-6 justify-center rounded-full border-2 border-current">
+								<div class="mt-2 h-3 w-1 animate-bounce rounded-full bg-current"></div>
 							</div>
-							<div class="absolute inset-0 border-2 border-current rounded-full animate-ping opacity-20"></div>
+							<div
+								class="absolute inset-0 animate-ping rounded-full border-2 border-current opacity-20"
+							></div>
 						</div>
 					</div>
 				</div>
@@ -223,7 +245,9 @@
 			<BlurFade delay={BLUR_FADE_DELAY}>
 				<div class="flex flex-col items-center justify-center space-y-6 text-center">
 					<div class="space-y-4">
-						<div class="inline-block rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent border border-accent/20">
+						<div
+							class="inline-block rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent"
+						>
 							Tech Stack
 						</div>
 						<h2 class="font-sans text-3xl font-bold tracking-tight sm:text-4xl">
@@ -236,11 +260,11 @@
 				</div>
 			</BlurFade>
 			<BlurFade delay={BLUR_FADE_DELAY * 1.5}>
-				<div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+				<div class="mx-auto flex max-w-4xl flex-wrap justify-center gap-3">
 					{#each DATA.skills as skill, id}
 						<BlurFade delay={BLUR_FADE_DELAY * 1.8 + id * 0.05}>
 							<Badge
-								class="rounded-lg border border-border/50 bg-card/50 backdrop-blur-sm text-card-foreground px-4 py-2 text-sm font-medium transition-all duration-300 hover:border-primary/50 hover:bg-primary/10 hover:text-primary hover:shadow-lg hover:shadow-primary/10 hover:scale-105 cursor-pointer"
+								class="cursor-pointer rounded-lg border border-border/50 bg-card/50 px-4 py-2 text-sm font-medium text-card-foreground backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-primary/50 hover:bg-primary/10 hover:text-primary hover:shadow-lg hover:shadow-primary/10"
 							>
 								{skill}
 							</Badge>
@@ -255,7 +279,9 @@
 			<BlurFade delay={BLUR_FADE_DELAY}>
 				<div class="flex flex-col items-center justify-center space-y-6 text-center">
 					<div class="space-y-4">
-						<div class="inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary border border-primary/20">
+						<div
+							class="inline-block rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-medium text-primary"
+						>
 							Featured Work
 						</div>
 						<h2 class="font-sans text-4xl font-bold tracking-tight sm:text-5xl">
@@ -283,7 +309,7 @@
 							{#snippet header()}
 								<a
 									href={project.href || '#'}
-									class="block cursor-pointer overflow-hidden rounded-t-xl focus-visible:ring-2 focus-visible:ring-primary/50 group-hover:scale-105 transition-transform duration-500"
+									class="block cursor-pointer overflow-hidden rounded-t-xl transition-transform duration-500 focus-visible:ring-2 focus-visible:ring-primary/50 group-hover:scale-105"
 								>
 									{#if project.video}
 										<video
@@ -303,21 +329,23 @@
 											loading="lazy"
 										/>
 									{/if}
-									<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+									<div
+										class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+									></div>
 								</a>
 							{/snippet}
 							{#snippet icon()}
-								<div class="flex flex-wrap gap-2 mb-3">
+								<div class="mb-3 flex flex-wrap gap-2">
 									{#each project.technologies.slice(0, 3) as tag}
 										<Badge
-											class="rounded-md border border-border/50 bg-card/80 text-card-foreground px-3 py-1 text-xs font-medium transition-all duration-300 hover:border-primary/30 hover:bg-primary/10"
+											class="rounded-md border border-border/50 bg-card/80 px-3 py-1 text-xs font-medium text-card-foreground transition-all duration-300 hover:border-primary/30 hover:bg-primary/10"
 										>
 											{tag}
 										</Badge>
 									{/each}
 									{#if project.technologies.length > 3}
 										<Badge
-											class="rounded-md border border-border/50 bg-card/80 text-card-foreground px-3 py-1 text-xs font-medium"
+											class="rounded-md border border-border/50 bg-card/80 px-3 py-1 text-xs font-medium text-card-foreground"
 										>
 											+{project.technologies.length - 3}
 										</Badge>

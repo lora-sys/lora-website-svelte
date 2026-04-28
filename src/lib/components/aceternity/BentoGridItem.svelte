@@ -15,7 +15,7 @@
 
 <div
 	class={cn(
-		'group/bento row-span-1 flex cursor-pointer flex-col justify-between space-y-4 rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 shadow-sm transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 hover:bg-card/80 focus-visible:ring-2 focus-visible:ring-primary/50 hover:-translate-y-2',
+		'group/bento row-span-1 flex cursor-pointer flex-col justify-between space-y-4 rounded-xl border border-border/50 bg-card/50 p-6 shadow-sm backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:bg-card/80 hover:shadow-2xl hover:shadow-primary/10 focus-visible:ring-2 focus-visible:ring-primary/50',
 		className
 	)}
 >
@@ -27,12 +27,14 @@
 	<div class="transition-all duration-300 group-hover/bento:translate-x-1">
 		{#if icon}{@render icon()}{/if}
 		{#if title}
-			<div class="mb-3 mt-2 font-sans text-xl font-bold text-foreground transition-colors duration-300 group-hover/bento:text-primary">
+			<div
+				class="mb-3 mt-2 font-sans text-xl font-bold text-foreground transition-colors duration-300 group-hover/bento:text-primary"
+			>
 				{title}
 			</div>
 		{/if}
 		{#if description}
-			<div class="text-sm text-muted-foreground leading-relaxed">
+			<div class="text-sm leading-relaxed text-muted-foreground">
 				{description}
 			</div>
 		{/if}

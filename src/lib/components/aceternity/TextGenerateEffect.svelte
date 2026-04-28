@@ -13,12 +13,9 @@
 
 <div class={cn('font-bold', className)}>
 	<div class="mt-4">
-		<div class="text-2xl leading-snug tracking-wide text-foreground whitespace-pre-wrap">
+		<div class="whitespace-pre-wrap text-2xl leading-snug tracking-wide text-foreground">
 			{#each wordsArray as token, idx (idx)}
-				<span
-					class="animate-text-reveal inline opacity-0"
-					style="animation-delay: {idx * 0.15}s"
-				>
+				<span class="animate-text-reveal inline opacity-0" style="animation-delay: {idx * 0.15}s">
 					{token}
 				</span>
 			{/each}

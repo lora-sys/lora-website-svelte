@@ -55,7 +55,7 @@
 		{height}
 		{loading}
 		{sizes}
-		class="w-full h-full object-cover"
+		class="h-full w-full object-cover"
 		style={placeholder ? `background: url(${placeholder}) center/cover no-repeat;` : undefined}
 	/>
 </picture>

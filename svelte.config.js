@@ -42,11 +42,13 @@ const mdsvexOptions = {
 		highlighter: async (code, lang = 'text') => {
 			const highlighter = await getHighlighter();
 			const validLang = SUPPORTED_LANGS.includes(lang) ? lang : 'text';
-			const html = escapeSvelte(highlighter.codeToHtml(code, { 
-				lang: validLang, 
-				themes: { light: 'github-light', dark: 'vesper' },
-				defaultColor: false
-			}));
+			const html = escapeSvelte(
+				highlighter.codeToHtml(code, {
+					lang: validLang,
+					themes: { light: 'github-light', dark: 'vesper' },
+					defaultColor: false
+				})
+			);
 			return `{@html \`${html}\` }`;
 		}
 	}
