@@ -5,9 +5,7 @@
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import '@fontsource/space-grotesk/index.css';
 	import '@fontsource/syne/index.css';
-	interface Props {
-		children?: import('svelte').Snippet;
-	}
+	import '@fontsource/lora/index.css';
 
 	let { children }: Props = $props();
 	setMode('dark');
