@@ -5,7 +5,7 @@
 	import { DATA } from '$lib/data/resume';
 	import BorderBeam from '$lib/components/magic/border-beam/border-beam.svelte';
 	import MagicCard from '$lib/components/magic/magic-card.svelte';
-	import Signature from '$lib/components/spell/signature.svelte';
+	import { Signature } from '$lib/components/spell/signature';
 
 	interface Props {
 		class?: string;
