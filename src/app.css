@@ -256,12 +256,25 @@
 	display: block;
 }
 
-/* Anime section isolation */
-.anime-isolated * {
-	all: initial !important;
-	font-family: inherit !important;
+/* Anime section isolation - prevent global styles from leaking in */
+.anime-isolated {
+	isolation: isolate;
+	contain: style;
 }
 
-.anime-isolated * * {
-	all: unset !important;
+.anime-isolated .prose,
+.anime-isolated .prose * {
+	all: revert;
+}
+
+/* Ensure anime section resets any inherited prose/typography overrides */
+.anime-isolated h2,
+.anime-isolated h3,
+.anime-isolated p,
+.anime-isolated a {
+	all: revert;
+}
+
+.anime-isolated img {
+	all: revert;
 }
