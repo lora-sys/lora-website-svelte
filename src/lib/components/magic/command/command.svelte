@@ -1,0 +1,152 @@
+<script lang="ts">
+	import { Command } from "bits-ui";
+	import { cn } from "$lib/utils";
+	import { goto } from "$app/navigation";
+	import { page } from "$app/stores";
+	import { onMount } from "svelte";
+	import { DATA } from "$lib/data/resume";
+
+	type Item = {
+		label: string;
+		keywords?: string[];
+		icon?: string;
+		action?: () => void;
+		href?: string;
+	};
+
+	type Group = {
+		name: string;
+		items: Item[];
+	};
+
+	let open = $state(false);
+	let search = $state("");
+
+	const navigationGroups: Group[] = [
+		{
+			name: "Navigation",
+			items: [
+				{ label: "Home", keywords: ["home", "hero", "landing"], href: "/" },
+				{ label: "Blog", keywords: ["blog", "posts", "articles"], href: "/blog" },
+				{ label: "Projects", keywords: ["projects", "work", "portfolio"], href: "/#projects" },
+				{ label: "Skills", keywords: ["skills", "tech", "stack"], href: "/#skills" },
+				{ label: "About", keywords: ["about", "me", "resume"], href: "/#about" },
+				{ label: "Contact", keywords: ["contact", "social", "links"], href: "/#contact" },
+			],
+		},
+		{
+			name: "Projects",
+			items: DATA.projects.map((p) => ({
+				label: p.title,
+				keywords: p.technologies,
+				href: p.href || "#",
+			})),
+		},
+		{
+			name: "Skills",
+			items: DATA.skills.slice(0, 10).map((s) => ({
+				label: s,
+				keywords: [s],
+			})),
+		},
+	];
+
+	function handleSelect(item: Item) {
+		open = false;
+		search = "";
+		if (item.href) {
+			goto(item.href);
+		} else if (item.action) {
+			item.action();
+		}
+	}
+
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+			e.preventDefault();
+			open = !open;
+		}
+		if (e.key === "Escape") {
+			open = false;
+		}
+	}
+
+	onMount(() => {
+		document.addEventListener("keydown", handleKeydown);
+		return () => document.removeEventListener("keydown", handleKeydown);
+	});
+</script>
+
+<svelte:document onkeydown={handleKeydown} />
+
+<button
+	onclick={() => (open = true)}
+	class="flex items-center gap-2 rounded-md border border-border/50 bg-card/50 px-3 py-1.5 text-sm text-muted-foreground backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-primary/5 hover:text-primary cursor-pointer"
+>
+	<span class="text-xs">Search...</span>
+	<kbd class="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">Ctrl K</kbd>
+</button>
+
+{#if open}
+	<div
+		class="fixed inset-0 z-50 bg-black/80"
+		onclick={() => (open = false)}
+		role="dialog"
+		aria-modal="true"
+	></div>
+{/if}
+
+{#if open}
+	<div
+		class="fixed left-1/2 top-1/2 z-50 w-full max-w-[490px] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border bg-background shadow-popover animate-in fade-in-0 zoom-in-95"
+	>
+		<Command.Root
+			bind:value={search}
+			class={cn(
+				"divide-border flex h-full w-full flex-col divide-y self-start overflow-hidden rounded-xl border bg-background"
+			)}
+		>
+			<Command.Input
+				autofocus
+				placeholder="Search navigation, projects, skills..."
+				class="h-input bg-background placeholder:text-muted-foreground focus:outline-none inline-flex flex-1 truncate rounded-tl-xl rounded-tr-xl px-4 text-sm transition-colors"
+				onkeydown={(e) => {
+					if (e.key === "Escape") {
+						open = false;
+					}
+				}}
+			/>
+
+			<Command.List
+				class="max-h-[280px] overflow-y-auto overflow-x-hidden px-2 pb-2"
+			>
+				<Command.Empty
+					class="text-muted-foreground flex w-full items-center justify-center pb-6 pt-8 text-sm"
+				>
+					No results found.
+				</Command.Empty>
+
+				{#each navigationGroups as group (group.name)}
+					<Command.Group>
+						<Command.GroupHeading
+							class="text-muted-foreground px-3 pb-2 pt-4 text-xs"
+						>
+							{group.name}
+						</Command.GroupHeading>
+						<Command.GroupItems>
+							{#each group.items as item (item.label)}
+								<Command.Item
+									class="rounded-button data-selected:bg-muted outline-hidden flex h-10 cursor-pointer select-none items-center gap-2 px-3 py-2.5 text-sm capitalize"
+									keywords={item.keywords}
+									onSelect={() => handleSelect(item)}
+								>
+									{item.label}
+								</Command.Item>
+							{/each}
+						</Command.GroupItems>
+					</Command.Group>
+				{/each}
+			</Command.List>
+		</Command.Root>
+	</div>
+{/if}

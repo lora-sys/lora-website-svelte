@@ -17,7 +17,7 @@
 	const ldJsonTag = '<script type="application/ld+json">' + ldJson + '</' + 'script>';
 
 	// Extract headings for TOC
-	let toc = $derived(() => {
+	let toc = $derived.by(() => {
 		if (!data.content) return [];
 		const tempDiv = document.createElement('div');
 		tempDiv.innerHTML = data.content;

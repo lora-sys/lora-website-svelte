@@ -3,8 +3,7 @@
 	import Lens from '$lib/components/magic/lens/lens.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { DATA } from '$lib/data/resume';
-	import Autoplay from 'embla-carousel-autoplay';
-	let plugins = [Autoplay()];
+
 	let { zoomFactor = 1.5, lensSize = 200 } = $props();
 </script>
 
@@ -12,7 +11,7 @@
 	<div class="space-y-6">
 		<h2 class="text-2xl font-bold tracking-tight">Anime</h2>
 
-		<Carousel.Root class="w-full" opts={{ align: 'start', loop: true }} {plugins}>
+		<Carousel.Root class="w-full" opts={{ align: 'start', loop: true }}>
 			<Carousel.Content>
 				{#each DATA.anime as anime}
 					<Carousel.Item class="md:basis-1/2 lg:basis-1/3">
@@ -33,7 +32,7 @@
 							<div class="mt-4 space-y-2">
 								<h3 class="text-lg font-semibold">{anime.name}</h3>
 								<p class="text-sm text-muted-foreground">"{anime.quote}"</p>
-								<Button variant="outline" size="sm" asChild>
+								<Button variant="outline" size="sm">
 									<a href={anime.link} target="_blank" rel="noopener noreferrer">
 										{anime.buttonText}
 									</a>

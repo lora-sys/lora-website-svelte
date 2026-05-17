@@ -3,33 +3,53 @@
 	import AnimeSection from '$lib/components/portfolio/AnimeSection.svelte';
 	import HackathonCard from '$lib/components/portfolio/HackathonCard.svelte';
 	import ResumeCard from '$lib/components/portfolio/ResumeCard.svelte';
-	import * as Avatar from '$lib/components/ui/avatar';
 	import Badge from '$lib/components/ui/badge/badge.svelte';
 	import { DATA } from '$lib/data/resume';
 	import FavoritesSection from '$lib/components/portfolio/FavoriteSection.svelte';
-	import { Spotlight } from '$lib/components/aceternity';
-	import { TextGenerateEffect } from '$lib/components/aceternity';
-	import { BentoGrid, BentoGridItem } from '$lib/components/aceternity';
-	import Particles from '$lib/components/magic/Particles.svelte';
-	import { onMount } from 'svelte';
+	import TerminalHero from '$lib/components/magic/terminal/terminal-hero.svelte';
+	import BentoGrid from '$lib/components/magic/bento-grid/bento-grid.svelte';
+	import BentoGridItem from '$lib/components/aceternity/BentoGridItem.svelte';
+	import ShineBorder from '$lib/components/magic/shine-border/shine-border.svelte';
+	import NeonGradientCard from '$lib/components/magic/neon-gradient-card/neon-gradient-card.svelte';
+	import IconCloud from '$lib/components/magic/icon-cloud/icon-cloud.svelte';
+	import Marquee from '$lib/components/magic/marquee/marquee.svelte';
+	import RetroGrid from '$lib/components/magic/retro-grid/retro-grid.svelte';
+	import AnimatedGradientText from '$lib/components/magic/animated-gradient-text/animated-gradient-text.svelte';
+	import InteractiveHoverButton from '$lib/components/magic/interactive-hover-button/interactive-hover-button.svelte';
 
 	let BLUR_FADE_DELAY = 0.04;
 
-	let avatarEl: HTMLDivElement | undefined = $state();
-	let mouseX = $state(0);
-	let mouseY = $state(0);
+	// Skill icon image URLs for Icon Cloud
+	const skillImages = [
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg',
+		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg'
+	];
 
-	onMount(() => {
-		function handleMouseMove(e: MouseEvent) {
-			if (avatarEl) {
-				const rect = avatarEl.getBoundingClientRect();
-				mouseX = (e.clientX - rect.left - rect.width / 2) * 0.08;
-				mouseY = (e.clientY - rect.top - rect.height / 2) * 0.08;
-			}
-		}
-		window.addEventListener('mousemove', handleMouseMove);
-		return () => window.removeEventListener('mousemove', handleMouseMove);
-	});
+	// Work timeline data for Arc Timeline
+	const workTimeline = DATA.work.map((w) => ({
+		time: w.start + ' - ' + (w.end ?? 'Present'),
+		steps: [
+			{ icon: 'briefcase', content: w.title + ' @ ' + w.company }
+		]
+	}));
 </script>
 
 <svelte:head>
@@ -51,152 +71,19 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:image" content={DATA.img} />
 	<meta name="twitter:description" content={DATA.description} />
-
-	<meta name="google-site-verification" content="your-google-verification-code" />
-	<meta name="yandex-verification" content="your-yandex-verification-code" />
 </svelte:head>
+
 <main class="flex min-h-[100dvh] flex-col space-y-24">
-	<section id="hero">
-		<!-- Hero with Parallax background -->
-		<div class="relative flex min-h-[90vh] items-center justify-center overflow-hidden">
-			<!-- Parallax layers -->
-			<div class="absolute inset-0 z-0">
-				<div
-					class="absolute left-0 top-0 h-full w-full bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"
-				></div>
-				<div
-					class="absolute left-1/4 top-1/4 h-96 w-96 animate-pulse rounded-full bg-primary/10 blur-3xl"
-				></div>
-				<div
-					class="absolute bottom-1/4 right-1/4 h-80 w-80 animate-pulse rounded-full bg-accent/10 blur-3xl"
-					style="animation-delay: 2s;"
-				></div>
-			</div>
-
-			<Spotlight
-				className="-top-40 left-0 md:left-60 md:-top-20"
-				fill="hsl(var(--primary) / 0.15)"
-			/>
-			<Particles className="opacity-30" />
-
-			<!-- Radial gradient overlay -->
-			<div
-				class="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,hsl(var(--background)/0.9)_70%)]"
-			></div>
-
-			<div class="relative z-10 mx-auto w-full max-w-5xl px-6 text-center">
-				<BlurFade delay={BLUR_FADE_DELAY} yOffset={6}>
-					<p class="mb-6 text-sm font-medium uppercase tracking-widest text-primary sm:text-base">
-						{DATA.location}
-					</p>
-				</BlurFade>
-
-				<BlurFade delay={BLUR_FADE_DELAY * 2} yOffset={8}>
-					<h1
-						class="font-sans text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl/none"
-					>
-						{DATA.name}
-					</h1>
-				</BlurFade>
-
-				<BlurFade delay={BLUR_FADE_DELAY * 3} yOffset={6}>
-					<div class="mt-8 flex items-center justify-center">
-						<span class="mr-3 h-px w-16 bg-gradient-to-r from-transparent to-primary"></span>
-						<span class="text-lg font-medium text-muted-foreground sm:text-xl">
-							Software Engineer & Entrepreneur
-						</span>
-						<span class="ml-3 h-px w-16 bg-gradient-to-r from-primary to-transparent"></span>
-					</div>
-				</BlurFade>
-
-				<BlurFade delay={BLUR_FADE_DELAY * 4} yOffset={6}>
-					<div class="mt-12">
-						<TextGenerateEffect
-							words={DATA.description}
-							className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground"
-						/>
-					</div>
-				</BlurFade>
-
-				<BlurFade delay={BLUR_FADE_DELAY * 5} yOffset={6}>
-					<div class="mt-16 flex items-center justify-center gap-8">
-						<!-- Enhanced magnetic avatar -->
-						<div bind:this={avatarEl} class="group/avatar relative cursor-pointer">
-							<div
-								class="transition-all duration-500 ease-out group-hover/avatar:rotate-3 group-hover/avatar:scale-110"
-								style="transform: translate({mouseX}px, {mouseY}px)"
-							>
-								<Avatar.Root
-									class="size-36 border-2 border-primary/30 shadow-[0_0_40px_hsl(var(--primary)/0.3)] transition-all duration-300 group-hover/avatar:shadow-[0_0_60px_hsl(var(--primary)/0.5)] sm:size-44"
-								>
-									<Avatar.Image alt={DATA.name} src={DATA.avatarUrl} />
-									<Avatar.Fallback
-										class="bg-gradient-to-br from-primary/20 to-accent/20 text-3xl font-bold text-primary sm:text-4xl"
-									>
-										{DATA.initials}
-									</Avatar.Fallback>
-								</Avatar.Root>
-							</div>
-							<!-- Enhanced glow ring -->
-							<div
-								class="absolute inset-0 rounded-full opacity-0 transition-all duration-500 group-hover/avatar:scale-125 group-hover/avatar:opacity-100"
-								style="background: radial-gradient(circle, hsl(var(--primary)/0.2) 0%, transparent 70%);"
-							></div>
-							<!-- Floating particles around avatar -->
-							<div class="pointer-events-none absolute inset-0">
-								<div
-									class="absolute left-2 top-2 h-2 w-2 animate-ping rounded-full bg-primary/40"
-								></div>
-								<div
-									class="absolute right-3 top-4 h-1 w-1 animate-ping rounded-full bg-accent/40"
-									style="animation-delay: 1s;"
-								></div>
-								<div
-									class="absolute bottom-3 left-4 h-1.5 w-1.5 animate-ping rounded-full bg-primary/30"
-									style="animation-delay: 2s;"
-								></div>
-							</div>
-						</div>
-					</div>
-				</BlurFade>
-
-				<BlurFade delay={BLUR_FADE_DELAY * 6} yOffset={6}>
-					<div class="mt-12 flex flex-wrap justify-center gap-4">
-						{#each Object.values(DATA.contact.social) as link}
-							<a
-								href={link.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="group relative rounded-full border border-border/50 bg-card/50 px-6 py-3 text-sm font-medium backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-primary/50 hover:bg-primary/5 hover:text-primary hover:shadow-[0_0_20px_hsl(var(--primary)/0.1)] focus-visible:ring-2 focus-visible:ring-primary/50"
-							>
-								<span class="relative z-10">{link.name}</span>
-								<div
-									class="absolute inset-0 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-								></div>
-							</a>
-						{/each}
-					</div>
-				</BlurFade>
-			</div>
-
-			<!-- Enhanced scroll indicator -->
-			<BlurFade delay={BLUR_FADE_DELAY * 8} yOffset={4}>
-				<div class="absolute bottom-8 left-1/2 -translate-x-1/2">
-					<div class="flex flex-col items-center gap-2 text-muted-foreground/60">
-						<span class="text-xs font-medium uppercase tracking-wider">Scroll</span>
-						<div class="relative">
-							<div class="flex h-10 w-6 justify-center rounded-full border-2 border-current">
-								<div class="mt-2 h-3 w-1 animate-bounce rounded-full bg-current"></div>
-							</div>
-							<div
-								class="absolute inset-0 animate-ping rounded-full border-2 border-current opacity-20"
-							></div>
-						</div>
-					</div>
-				</div>
+	<!-- ==================== HERO ==================== -->
+	<section id="hero" class="relative flex min-h-[90vh] items-center justify-center overflow-hidden">
+		<div class="relative z-10 mx-auto w-full max-w-3xl px-6">
+			<BlurFade delay={BLUR_FADE_DELAY} yOffset={6}>
+				<TerminalHero />
 			</BlurFade>
 		</div>
 	</section>
+
+	<!-- ==================== ABOUT ==================== -->
 	<section id="about">
 		<BlurFade delay={BLUR_FADE_DELAY}>
 			<h2 class="text-xl font-bold">About</h2>
@@ -209,6 +96,8 @@
 			</div>
 		</BlurFade>
 	</section>
+
+	<!-- ==================== WORK EXPERIENCE ==================== -->
 	<section id="work">
 		<div class="flex min-h-0 flex-col gap-y-3">
 			<BlurFade delay={BLUR_FADE_DELAY}>
@@ -221,6 +110,8 @@
 			{/each}
 		</div>
 	</section>
+
+	<!-- ==================== EDUCATION ==================== -->
 	<section id="education">
 		<div class="flex min-h-0 flex-col gap-y-3">
 			<BlurFade delay={BLUR_FADE_DELAY}>
@@ -240,6 +131,8 @@
 			{/each}
 		</div>
 	</section>
+
+	<!-- ==================== SKILLS (Icon Cloud) ==================== -->
 	<section id="skills">
 		<div class="w-full space-y-12 py-16">
 			<BlurFade delay={BLUR_FADE_DELAY}>
@@ -260,20 +153,27 @@
 				</div>
 			</BlurFade>
 			<BlurFade delay={BLUR_FADE_DELAY * 1.5}>
-				<div class="mx-auto flex max-w-4xl flex-wrap justify-center gap-3">
-					{#each DATA.skills as skill, id}
-						<BlurFade delay={BLUR_FADE_DELAY * 1.8 + id * 0.05}>
-							<Badge
-								class="cursor-pointer rounded-lg border border-border/50 bg-card/50 px-4 py-2 text-sm font-medium text-card-foreground backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-primary/50 hover:bg-primary/10 hover:text-primary hover:shadow-lg hover:shadow-primary/10"
-							>
-								{skill}
-							</Badge>
-						</BlurFade>
-					{/each}
+				<div class="flex flex-col items-center gap-8 lg:flex-row lg:items-start lg:justify-center">
+					<div class="flex justify-center">
+						<IconCloud images={skillImages} class="mx-auto" />
+					</div>
+					<div class="flex flex-wrap justify-center gap-2 lg:max-w-sm">
+						{#each DATA.skills as skill, id}
+							<BlurFade delay={BLUR_FADE_DELAY * 1.8 + id * 0.05}>
+								<Badge
+									class="cursor-default rounded-lg border border-term-green/30 bg-term-green/5 px-3 py-1.5 font-mono text-xs text-term-green transition-all duration-300 hover:scale-105 hover:border-term-green/60 hover:shadow-[0_0_12px_rgba(34,197,94,0.15)]"
+								>
+									{skill}
+								</Badge>
+							</BlurFade>
+						{/each}
+					</div>
 				</div>
 			</BlurFade>
 		</div>
 	</section>
+
+	<!-- ==================== PROJECTS (Bento + Shine/Neon) ==================== -->
 	<section id="projects">
 		<div class="w-full space-y-16 py-16">
 			<BlurFade delay={BLUR_FADE_DELAY}>
@@ -290,75 +190,129 @@
 						<p
 							class="mx-auto max-w-2xl text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed"
 						>
-							I&apos;ve worked on a variety of projects, from simple websites to complex web
+							I've worked on a variety of projects, from simple websites to complex web
 							applications. Here are a few of my favorites.
 						</p>
 					</div>
 				</div>
 			</BlurFade>
 
-			<!-- Enhanced Bento Grid for Projects -->
 			<div class="mx-auto max-w-7xl">
 				<BentoGrid>
 					{#each DATA.projects as project, id}
-						<BentoGridItem
-							title={project.title}
-							description={project.description}
-							className={id === 0 ? 'md:col-span-2 md:row-span-2' : id === 1 ? 'md:row-span-2' : ''}
-						>
-							{#snippet header()}
-								<a
-									href={project.href || '#'}
-									class="relative block aspect-[16/9] h-full min-h-[18rem] w-full overflow-hidden rounded-t-xl transition-transform duration-500 focus-visible:ring-2 focus-visible:ring-primary/50 group-hover:scale-105"
-									style="aspect-ratio: 16 / 9;"
-								>
-									{#if project.video}
-										<video
-											class="h-full w-full object-cover transition-all duration-500 group-hover:scale-110"
-											src={project.video}
-											autoplay
-											loop
-											muted
-											playsinline
-											preload="metadata"
-										></video>
-									{:else}
-										<img
-											class="h-full w-full object-cover transition-all duration-500 group-hover:scale-110"
-											src={project.image}
-											alt={project.title}
-											loading="lazy"
+						{#if id === 0}
+							<!-- Featured project: Shine Border -->
+							<BentoGridItem
+								title={project.title}
+								description={project.description}
+								className="md:col-span-2 md:row-span-2"
+							>
+								{#snippet header()}
+									<div class="group relative h-full w-full overflow-hidden rounded-t-xl">
+										<ShineBorder
+											shineColor={['#22c55e', '#9c40ff', '#ffaa40']}
+											borderWidth={2}
+											duration={10}
 										/>
-									{/if}
-									<div
-										class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-									></div>
-								</a>
-							{/snippet}
-							{#snippet icon()}
-								<div class="mb-3 flex flex-wrap gap-2">
-									{#each project.technologies.slice(0, 3) as tag}
-										<Badge
-											class="rounded-md border border-border/50 bg-card/80 px-3 py-1 text-xs font-medium text-card-foreground transition-all duration-300 hover:border-primary/30 hover:bg-primary/10"
+										<a
+											href={project.href || '#'}
+											class="relative block aspect-[16/9] h-full min-h-[18rem] w-full overflow-hidden transition-transform duration-500 group-hover:scale-105"
 										>
-											{tag}
-										</Badge>
-									{/each}
-									{#if project.technologies.length > 3}
-										<Badge
-											class="rounded-md border border-border/50 bg-card/80 px-3 py-1 text-xs font-medium text-card-foreground"
+											{#if project.video}
+												<video
+													class="h-full w-full object-cover"
+													src={project.video}
+													autoplay loop muted playsinline
+													preload="metadata"
+												></video>
+											{:else}
+												<img
+													class="h-full w-full object-cover"
+													src={project.image}
+													alt={project.title}
+													loading="lazy"
+												/>
+											{/if}
+										</a>
+									</div>
+								{/snippet}
+								{#snippet icon()}
+									<div class="mb-3 flex flex-wrap gap-2">
+										{#each project.technologies.slice(0, 4) as tag}
+											<Badge
+												class="rounded-md border border-term-green/30 bg-term-green/5 px-3 py-1 font-mono text-xs text-term-green"
+											>
+												{tag}
+											</Badge>
+										{/each}
+									</div>
+								{/snippet}
+							</BentoGridItem>
+						{:else}
+							<!-- Normal project: Neon Gradient Card wrapper -->
+							<BentoGridItem
+								title={project.title}
+								description={project.description}
+								className={id === 1 ? 'md:row-span-2' : ''}
+							>
+								{#snippet header()}
+									<NeonGradientCard
+										class="h-full"
+										neonColors={{
+											firstColor: id % 2 === 0 ? '#22c55e' : '#9c40ff',
+											secondColor: id % 2 === 0 ? '#06b6d4' : '#ffaa40'
+										}}
+										borderRadius={16}
+									>
+										<a
+											href={project.href || '#'}
+											class="relative block aspect-[16/9] h-full min-h-[12rem] w-full overflow-hidden rounded-xl transition-transform duration-500 group-hover:scale-105"
 										>
-											+{project.technologies.length - 3}
-										</Badge>
-									{/if}
-								</div>
-							{/snippet}
-						</BentoGridItem>
+											{#if project.video}
+												<video
+													class="h-full w-full rounded-xl object-cover"
+													src={project.video}
+													autoplay loop muted playsinline
+													preload="metadata"
+												></video>
+											{:else}
+												<img
+													class="h-full w-full rounded-xl object-cover"
+													src={project.image}
+													alt={project.title}
+													loading="lazy"
+												/>
+											{/if}
+										</a>
+									</NeonGradientCard>
+								{/snippet}
+								{#snippet icon()}
+									<div class="mb-3 flex flex-wrap gap-2">
+										{#each project.technologies.slice(0, 3) as tag}
+											<Badge
+												class="rounded-md border border-border/50 bg-card/80 px-3 py-1 font-mono text-xs text-card-foreground transition-all duration-300 hover:border-primary/30 hover:bg-primary/10"
+											>
+												{tag}
+											</Badge>
+										{/each}
+										{#if project.technologies.length > 3}
+											<Badge
+												class="rounded-md border border-border/50 bg-card/80 px-3 py-1 font-mono text-xs text-card-foreground"
+											>
+												+{project.technologies.length - 3}
+											</Badge>
+										{/if}
+									</div>
+								{/snippet}
+							</BentoGridItem>
+						{/if}
 					{/each}
 				</BentoGrid>
 			</div>
 		</div>
 	</section>
+
+	<!-- ==================== HACKATHONS ==================== -->
 	<section id="hackathons">
 		<div class="w-full space-y-12 py-12">
 			<BlurFade delay={BLUR_FADE_DELAY}>
@@ -371,11 +325,9 @@
 						<p
 							class="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed"
 						>
-							During my time in university, I attended{' '}
-							{DATA.hackathons.length}+ hackathons. People from around the country would come
-							together and build incredible things in 2-3 days. It was eye-opening to see the
-							endless possibilities brought to life by a group of motivated and passionate
-							individuals.
+							During my time in university, I attended {DATA.hackathons.length}+ hackathons.
+							People from around the country would come together and build incredible things
+							in 2-3 days.
 						</p>
 					</div>
 				</div>
@@ -399,20 +351,26 @@
 			</BlurFade>
 		</div>
 	</section>
-	<section id="anime">
+
+	<!-- ==================== ANIME (isolated) ==================== -->
+	<section id="anime" class="anime-isolated">
 		<BlurFade delay={BLUR_FADE_DELAY}>
 			<AnimeSection />
 		</BlurFade>
 	</section>
+
+	<!-- ==================== FAVORITES ==================== -->
 	<section id="favorites">
 		<BlurFade delay={BLUR_FADE_DELAY}>
 			<FavoritesSection />
 		</BlurFade>
 	</section>
+
+	<!-- ==================== CONTACT ==================== -->
 	<section id="contact">
 		<div class="grid w-full items-center justify-center gap-4 px-4 py-12 text-center md:px-6">
 			<BlurFade delay={BLUR_FADE_DELAY * 2}>
-				<div class="space-y-3">
+				<div class="space-y-6">
 					<div class="inline-block rounded-lg bg-foreground px-3 py-1 text-sm text-background">
 						Contact
 					</div>
@@ -424,10 +382,50 @@
 						<a href={DATA.contact.social.X.url} class="text-blue-500 hover:underline">
 							with a direct question on twitter
 						</a>
-						and I&apos;ll respond whenever I can. I will ignore all soliciting.
+						and I'll respond whenever I can.
 					</p>
+					<div class="flex justify-center pt-4">
+						<a href={DATA.contact.social.X.url} target="_blank" rel="noopener noreferrer">
+							<InteractiveHoverButton class="rounded-full border border-term-green/30 bg-term-green/5 px-8 py-3 font-mono text-sm text-term-green">
+								Say Hello
+							</InteractiveHoverButton>
+						</a>
+					</div>
 				</div>
 			</BlurFade>
 		</div>
 	</section>
+
+	<!-- ==================== FOOTER ==================== -->
+	<footer class="relative overflow-hidden border-t border-border/40 py-16">
+		<RetroGrid class="opacity-20" />
+		<div class="relative z-10 flex flex-col items-center gap-6">
+			<AnimatedGradientText speed={1.5} colorFrom="#22c55e" colorTo="#9c40ff">
+				<span class="font-heading text-2xl font-bold tracking-tight sm:text-3xl">
+					{DATA.name}
+				</span>
+			</AnimatedGradientText>
+			<div class="flex items-center gap-4">
+				{#each Object.entries(DATA.contact.social) as [_, social]}
+					<a
+						href={social.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-muted-foreground transition-colors hover:text-foreground"
+						aria-label={social.name}
+					>
+						{#if social?.dark_icon}
+							<img src={social.icon} class="size-5 dark:hidden" alt={social.name} />
+							<img src={social.dark_icon} class="hidden size-5 dark:block" alt={social.name} />
+						{:else}
+							<img src={social.icon} class="size-5" alt={social.name} />
+						{/if}
+					</a>
+				{/each}
+			</div>
+			<p class="font-mono text-xs text-muted-foreground">
+				&copy; {new Date().getFullYear()} {DATA.name}. Built with SvelteKit & MagicUI.
+			</p>
+		</div>
+	</footer>
 </main>

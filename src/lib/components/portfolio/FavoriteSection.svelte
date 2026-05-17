@@ -19,7 +19,7 @@
 			{#each DATA.favorites as item, i}
 				{#if item.isSpotify}
 					<Dialog.Root>
-						<Dialog.Trigger asChild>
+						<Dialog.Trigger>
 							<div class={gridClasses[i] || ''}>
 								<BentoCard
 									name={item.name}
