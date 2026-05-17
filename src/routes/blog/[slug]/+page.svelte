@@ -19,8 +19,9 @@
 	});
 	const ldJsonTag = '<script type="application/ld+json">' + ldJson + '<\/script>';
 
-	// Extract headings for TOC
+	// Extract headings for TOC - only run on client
 	let toc = $derived.by(() => {
+		if (typeof document === 'undefined') return [];
 		if (!data.content) return [];
 		const tempDiv = document.createElement('div');
 		tempDiv.innerHTML = data.content;
