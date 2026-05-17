@@ -98,13 +98,11 @@
 
 {#if open}
 	<div
-		class="fixed left-1/2 top-1/2 z-50 w-full max-w-[490px] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border bg-background shadow-popover animate-in fade-in-0 zoom-in-95"
+		class="fixed left-1/2 top-1/2 z-50 w-full -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border bg-background shadow-popover animate-in fade-in-0 zoom-in-95 sm:max-w-[490px] max-w-[calc(100vw-2rem)] max-h-[90vh] flex flex-col overflow-hidden"
 	>
 		<Command.Root
 			bind:value={search}
-			class={cn(
-				"divide-border flex h-full w-full flex-col divide-y self-start overflow-hidden rounded-xl border bg-background"
-			)}
+			class="divide-border flex h-full w-full flex-col divide-y self-start overflow-hidden rounded-xl border bg-background"
 		>
 			<Command.Input
 				autofocus

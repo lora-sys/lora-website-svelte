@@ -99,11 +99,13 @@
 	<!-- ==================== ABOUT ==================== -->
 	<section id="about">
 		<BlurFade delay={BLUR_FADE_DELAY}>
-			<h2 class="text-xl font-bold">About</h2>
+			<div class="mb-4 inline-block rounded-full border border-term-green/20 bg-term-green/5 px-4 py-2 font-mono text-xs text-term-green">
+				<span class="text-term-green/60">~/</span>whoami
+			</div>
 		</BlurFade>
 		<BlurFade delay={BLUR_FADE_DELAY * 1.4}>
 			<div
-				class="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert"
+				class="prose max-w-full text-pretty font-mono text-sm leading-relaxed text-muted-foreground"
 			>
 				{@html DATA.summaryHtml}
 			</div>
@@ -114,13 +116,18 @@
 	<section id="work">
 		<div class="flex min-h-0 flex-col gap-y-3">
 			<BlurFade delay={BLUR_FADE_DELAY}>
-				<h2 class="text-xl font-bold">Work Experience</h2>
+				<div class="mb-4 inline-flex items-center gap-2 font-mono text-xs">
+					<span class="text-term-green">$</span>
+					<span class="text-muted-foreground">cat /experience/*.json</span>
+				</div>
 			</BlurFade>
-			{#each DATA.work as work, id}
-				<BlurFade delay={BLUR_FADE_DELAY * 1.2 + id * 0.05}>
-					<ResumeCard {...work} />
-				</BlurFade>
-			{/each}
+			<div class="space-y-2 border-l border-term-green/20 pl-4">
+				{#each DATA.work as work, id}
+					<BlurFade delay={BLUR_FADE_DELAY * 1.2 + id * 0.05}>
+						<ResumeCard {...work} />
+					</BlurFade>
+				{/each}
+			</div>
 		</div>
 		<!-- Arc Timeline visualization -->
 		<BlurFade delay={BLUR_FADE_DELAY * 2}>
@@ -137,20 +144,25 @@
 	<section id="education">
 		<div class="flex min-h-0 flex-col gap-y-3">
 			<BlurFade delay={BLUR_FADE_DELAY}>
-				<h2 class="text-xl font-bold">Education</h2>
+				<div class="mb-4 inline-flex items-center gap-2 font-mono text-xs">
+					<span class="text-term-green">$</span>
+					<span class="text-muted-foreground">cat /education/*.json</span>
+				</div>
 			</BlurFade>
-			{#each DATA.education as edu, id}
-				<BlurFade delay={BLUR_FADE_DELAY * 1.2 + id * 0.05}>
-					<ResumeCard
-						href={edu.href}
-						logoUrl={edu.logoUrl}
-						company={edu.school}
-						title={edu.degree}
-						start={edu.start}
-						end={edu.end}
-					/>
-				</BlurFade>
-			{/each}
+			<div class="space-y-2 border-l border-term-green/20 pl-4">
+				{#each DATA.education as edu, id}
+					<BlurFade delay={BLUR_FADE_DELAY * 1.2 + id * 0.05}>
+						<ResumeCard
+							href={edu.href}
+							logoUrl={edu.logoUrl}
+							company={edu.school}
+							title={edu.degree}
+							start={edu.start}
+							end={edu.end}
+						/>
+					</BlurFade>
+				{/each}
+			</div>
 		</div>
 	</section>
 
@@ -161,15 +173,15 @@
 				<div class="flex flex-col items-center justify-center space-y-6 text-center">
 					<div class="space-y-4">
 						<div
-							class="inline-block rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent"
+							class="inline-flex items-center gap-2 rounded-full border border-term-green/20 bg-term-green/5 px-4 py-2 font-mono text-xs text-term-green"
 						>
-							Tech Stack
+							<span class="text-term-green/60">~/</span>skills --list
 						</div>
-						<h2 class="font-sans text-3xl font-bold tracking-tight sm:text-4xl">
+						<h2 class="font-mono text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
 							Skills & Technologies
 						</h2>
-						<p class="text-muted-foreground md:text-lg">
-							Tools and technologies I use to bring ideas to life
+						<p class="font-mono text-sm text-muted-foreground">
+							Tools and technologies I use to build things
 						</p>
 					</div>
 				</div>
@@ -202,11 +214,11 @@
 				<div class="flex flex-col items-center justify-center space-y-6 text-center">
 					<div class="space-y-4">
 						<div
-							class="inline-block rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-medium text-primary"
+							class="inline-flex items-center gap-2 rounded-full border border-term-green/20 bg-term-green/5 px-4 py-2 font-mono text-xs text-term-green"
 						>
-							Featured Work
+							<span class="text-term-green/60">~/</span>projects
 						</div>
-						<h2 class="font-sans text-4xl font-bold tracking-tight sm:text-5xl">
+						<h2 class="font-mono text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
 							Check out my latest work
 						</h2>
 						<p
@@ -340,16 +352,16 @@
 			<BlurFade delay={BLUR_FADE_DELAY}>
 				<div class="flex flex-col items-center justify-center space-y-4 text-center">
 					<div class="space-y-2">
-						<div class="inline-block rounded-lg bg-foreground px-3 py-1 text-sm text-background">
-							Hackathons
-						</div>
-						<h2 class="text-3xl font-bold tracking-tighter sm:text-5xl">I like building things</h2>
-						<p
-							class="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed"
+						<div
+							class="inline-flex items-center gap-2 rounded-full border border-term-green/20 bg-term-green/5 px-4 py-2 font-mono text-xs text-term-green"
 						>
+							<span class="text-term-green/60">~/</span>hackathons.log
+						</div>
+						<h2 class="font-mono text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+							I like building things
+						</h2>
+						<p class="font-mono text-sm text-muted-foreground">
 							During my time in university, I attended {DATA.hackathons.length}+ hackathons.
-							People from around the country would come together and build incredible things
-							in 2-3 days.
 						</p>
 					</div>
 				</div>
@@ -377,6 +389,10 @@
 	<!-- ==================== ANIME (isolated) ==================== -->
 	<section id="anime" class="anime-isolated">
 		<BlurFade delay={BLUR_FADE_DELAY}>
+			<div class="mb-6 inline-flex items-center gap-2 font-mono text-xs">
+				<span class="text-term-green">$</span>
+				<span class="text-muted-foreground">cd ~/favorites/anime</span>
+			</div>
 			<AnimeSection />
 		</BlurFade>
 	</section>
@@ -384,6 +400,10 @@
 	<!-- ==================== FAVORITES ==================== -->
 	<section id="favorites">
 		<BlurFade delay={BLUR_FADE_DELAY}>
+			<div class="mb-6 inline-flex items-center gap-2 font-mono text-xs">
+				<span class="text-term-green">$</span>
+				<span class="text-muted-foreground">cat ~/favorites/*.json</span>
+			</div>
 			<FavoritesSection />
 		</BlurFade>
 	</section>
@@ -393,15 +413,17 @@
 		<div class="grid w-full items-center justify-center gap-4 px-4 py-12 text-center md:px-6">
 			<BlurFade delay={BLUR_FADE_DELAY * 2}>
 				<div class="space-y-6">
-					<div class="inline-block rounded-lg bg-foreground px-3 py-1 text-sm text-background">
-						Contact
-					</div>
-					<h2 class="text-3xl font-bold tracking-tight sm:text-5xl">Get in Touch</h2>
-					<p
-						class="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed"
+					<div
+						class="inline-flex items-center gap-2 rounded-full border border-term-green/20 bg-term-green/5 px-4 py-2 font-mono text-xs text-term-green"
 					>
+						<span class="text-term-green/60">~/</span>contact.sh
+					</div>
+					<h2 class="font-mono text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+						Get in Touch
+					</h2>
+					<p class="mx-auto max-w-[600px] font-mono text-sm text-muted-foreground">
 						Want to chat? Just shoot me a dm
-						<a href={DATA.contact.social.X.url} class="text-blue-500 hover:underline">
+						<a href={DATA.contact.social.X.url} class="text-term-green hover:underline">
 							with a direct question on twitter
 						</a>
 						and I'll respond whenever I can.

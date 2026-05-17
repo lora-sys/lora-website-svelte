@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { DATA } from '$lib/data/resume';
-	import ModeToggle from './ModeToggle.svelte';
 	import Command from '$lib/components/magic/command/command.svelte';
 
 	let currentPath = $derived($page.url.pathname);
@@ -47,13 +46,12 @@
 			</ul>
 		</div>
 
-		<!-- Right: Path indicator + Command + Mode toggle -->
+		<!-- Right: Path indicator + Command -->
 		<div class="flex items-center gap-3">
 			<span class="hidden font-mono text-xs text-muted-foreground md:block">
 				~{currentPath}
 			</span>
 			<Command />
-			<ModeToggle />
 		</div>
 	</nav>
 </header>
