@@ -8,43 +8,36 @@
 		duration?: number;
 		delay?: number;
 		class?: string;
+		once?: boolean;
+		inView?: boolean;
 	}
 
 	let {
 		text = "Signature",
-		color = "#22c55e",
+		color = "#1D1D1F",
 		fontSize = 72,
+		duration = 1.5,
+		delay = 0,
 		class: className,
+		once = false,
+		inView = false,
 	}: Props = $props();
-
-	let textStyle = $derived(`
-		font-size: ${fontSize}px;
-		font-family: 'Lastoria', serif;
-		background: linear-gradient(135deg, ${color}, #9c40ff, ${color}, #ffaa40);
-		background-size: 300% 300%;
-		-webkit-background-clip: text;
-		background-clip: text;
-		color: transparent;
-		animation: signature-gradient 3s ease infinite;
-	`);
 </script>
 
 <svelte:head>
-	<link rel="preload" href="/LastoriaBoldRegular.otf" as="font" type="font/otf" crossorigin="anonymous" />
 	<style>
 		@font-face {
 			font-family: 'Lastoria';
 			src: url('/LastoriaBoldRegular.otf') format('opentype');
 			font-weight: bold;
-			font-display: swap;
-		}
-		@keyframes signature-gradient {
-			0%, 100% { background-position: 0% 50%; }
-			50% { background-position: 100% 50%; }
+			font-display: block;
 		}
 	</style>
 </svelte:head>
 
-<div class={cn("overflow-visible tracking-wider", className)} style={textStyle}>
+<div
+	class={cn("overflow-visible tracking-wider", className)}
+	style="font-family: 'Lastoria', serif; font-size: {fontSize}px; color: {color};"
+>
 	{text}
 </div>
