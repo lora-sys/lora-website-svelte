@@ -58,14 +58,13 @@
 			commandHistory = [
 				...commandHistory,
 				'  Available commands:',
-				'  help      Show this help message',
-				'  dark      Switch to dark mode',
-				'  light     Switch to light mode',
-				'  projects  View my projects',
-				'  about     Learn about me',
-				'  contact   Get in touch',
-				'  clear     Clear terminal',
-				'  neofetch  System info'
+				'  help       Show this help message',
+				'  projects   View my projects',
+				'  about      Learn about me',
+				'  contact    Get in touch',
+				'  clear      Clear terminal',
+				'  neofetch   System info',
+				'  easteregg  ???'
 			];
 		} else if (trimmed === 'dark') {
 			setMode('dark');
@@ -131,6 +130,9 @@
 			commandHistory = [...commandHistory, '  Permission denied. Nice try though.'];
 		} else if (trimmed === 'exit') {
 			commandHistory = [...commandHistory, '  There is no escape from this terminal.'];
+		} else if (trimmed === 'easteregg') {
+			commandHistory = [...commandHistory, '  ...you found it.'];
+			triggerKonami();
 		} else if (trimmed) {
 			commandHistory = [
 				...commandHistory,
