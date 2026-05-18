@@ -5,6 +5,7 @@
 	import BlurFade from '$lib/components/magic/BlurFade.svelte';
 	import { formatDate } from '$lib/utils';
 	import { onMount } from 'svelte';
+	import { base } from '$app/paths';
 
 	let { data } = $props();
 
@@ -109,7 +110,7 @@
 			<BlurFade>
 				<!-- Back button -->
 				<a
-					href="/blog"
+					href={`${base}/blog`}
 					class="group mb-8 inline-flex items-center gap-1 font-mono text-sm text-muted-foreground transition-colors hover:text-term-green"
 				>
 					<svg
@@ -218,7 +219,7 @@
 				<!-- Footer -->
 				<Separator class="my-8 border-border/50" />
 				<div class="flex items-center justify-between font-mono text-sm text-muted-foreground">
-					<a href="/blog" class="flex items-center gap-1 transition-colors hover:text-term-green">
+					<a href={`${base}/blog`} class="flex items-center gap-1 transition-colors hover:text-term-green">
 						<span class="text-term-green">$</span> cd ../blog
 					</a>
 					<span>by {data.meta?.author ?? 'lora-sys'}</span>

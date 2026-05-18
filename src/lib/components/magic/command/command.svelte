@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { DATA } from '$lib/data/resume';
 	import { portal } from '$lib/actions/portal';
+	import { base } from '$app/paths';
 
 	type Item = {
 		label: string;
@@ -23,12 +24,12 @@
 		{
 			name: 'Navigation',
 			items: [
-				{ label: 'Home', keywords: ['home', 'hero', 'landing'], href: '/' },
-				{ label: 'Blog', keywords: ['blog', 'posts', 'articles'], href: '/blog' },
-				{ label: 'Projects', keywords: ['projects', 'work', 'portfolio'], href: '/#projects' },
-				{ label: 'Skills', keywords: ['skills', 'tech', 'stack'], href: '/#skills' },
-				{ label: 'About', keywords: ['about', 'me', 'resume'], href: '/#about' },
-				{ label: 'Contact', keywords: ['contact', 'social', 'links'], href: '/#contact' }
+				{ label: 'Home', keywords: ['home', 'hero', 'landing'], href: `${base}/` },
+				{ label: 'Blog', keywords: ['blog', 'posts', 'articles'], href: `${base}/blog` },
+				{ label: 'Projects', keywords: ['projects', 'work', 'portfolio'], href: `${base}/#projects` },
+				{ label: 'Skills', keywords: ['skills', 'tech', 'stack'], href: `${base}/#skills` },
+				{ label: 'About', keywords: ['about', 'me', 'resume'], href: `${base}/#about` },
+				{ label: 'Contact', keywords: ['contact', 'social', 'links'], href: `${base}/#contact` }
 			]
 		},
 		{

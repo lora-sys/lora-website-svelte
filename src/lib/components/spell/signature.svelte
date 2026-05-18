@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { browser } from '$app/environment';
 	import { cn } from '$lib/utils';
 	import { motion, type AnimationOptions, type Transition } from 'motion-sv';
@@ -100,7 +101,7 @@
 		let currentRequest = ++requestId;
 
 		try {
-			let response = await fetch('/LastoriaBoldRegular.otf');
+			let response = await fetch(`${base}/LastoriaBoldRegular.otf`);
 
 			if (!response.ok) {
 				throw new Error(`Failed to load font: ${response.status}`);

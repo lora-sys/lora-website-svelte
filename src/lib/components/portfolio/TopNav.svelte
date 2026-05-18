@@ -2,17 +2,18 @@
 	import { page } from '$app/stores';
 	import { DATA } from '$lib/data/resume';
 	import Command from '$lib/components/magic/command/command.svelte';
+		import { base } from '$app/paths';
 
 	let currentPath = $derived($page.url.pathname);
 	let mobileMenuOpen = $state(false);
 
 	const navItems = [
-		{ label: 'Home', href: '/' },
-		{ label: 'Blog', href: '/blog' },
-		{ label: 'Projects', href: '/#projects' },
-		{ label: 'Skills', href: '/#skills' },
-		{ label: 'About', href: '/#about' },
-		{ label: 'Contact', href: '/#contact' }
+		{ label: 'Home', href: `${base}/` },
+		{ label: 'Blog', href: `${base}/blog` },
+		{ label: 'Projects', href: `${base}/#projects` },
+		{ label: 'Skills', href: `${base}/#skills` },
+		{ label: 'About', href: `${base}/#about` },
+		{ label: 'Contact', href: `${base}/#contact` }
 	];
 
 	function isActive(href: string): boolean {
@@ -32,7 +33,7 @@
 		<!-- Left: Logo + Breadcrumb -->
 		<div class="flex items-center gap-6">
 			<a
-				href="/"
+				href={base + "/"}
 				class="font-mono text-sm font-bold text-term-green transition-colors hover:text-gold"
 			>
 				{DATA.name}<span class="animate-pulse">_</span>

@@ -3,6 +3,7 @@
 	import BlurFade from '$lib/components/magic/BlurFade.svelte';
 	import Badge from '$lib/components/ui/badge/badge.svelte';
 	let { data } = $props();
+	import { base } from '$app/paths';
 	let BLUR_FADE_DELAY = 0.04;
 </script>
 
@@ -37,7 +38,7 @@
 		{#each data.posts as post, id}
 			<BlurFade delay={BLUR_FADE_DELAY * 1.5 + id * 0.1}>
 				<a
-					href="/blog/{post.slug}"
+					href={`${base}/blog/${post.slug}`}
 					class="group relative block overflow-hidden rounded-2xl border border-border/50 bg-card/50 p-8 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:bg-card/80 hover:shadow-2xl hover:shadow-primary/10 focus-visible:ring-2 focus-visible:ring-primary/50"
 				>
 					<!-- Gradient accent line -->
