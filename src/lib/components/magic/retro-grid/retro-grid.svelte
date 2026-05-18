@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { cn } from "$lib/utils";
-	import type { HTMLAttributes } from "svelte/elements";
+	import { cn } from '$lib/utils';
+	import type { HTMLAttributes } from 'svelte/elements';
 
 	interface RetroGridProps extends HTMLAttributes<HTMLDivElement> {
 		class?: string;
@@ -16,15 +16,15 @@
 		angle = 65,
 		cellSize = 60,
 		opacity = 0.5,
-		lightLineColor = "gray",
-		darkLineColor = "gray",
+		lightLineColor = 'gray',
+		darkLineColor = 'gray',
 		...props
 	}: RetroGridProps = $props();
 </script>
 
 <div
 	class={cn(
-		"pointer-events-none absolute size-full overflow-hidden perspective-[200px]",
+		'perspective-[200px] pointer-events-none absolute size-full overflow-hidden',
 		`opacity-(--opacity)`,
 		className
 	)}
@@ -36,12 +36,12 @@
 		--dark-line: {darkLineColor};"
 	{...props}
 >
-	<div class="absolute inset-0 transform-[rotateX(var(--grid-angle))]">
+	<div class="transform-[rotateX(var(--grid-angle))] absolute inset-0">
 		<div
-			class="animate-grid inset-[0%_0px] ml-[-200%] h-[300vh] w-[600vw] origin-[100%_0_0] bg-[linear-gradient(to_right,var(--light-line)_1px,transparent_0),linear-gradient(to_bottom,var(--light-line)_1px,transparent_0)] bg-size-[var(--cell-size)_var(--cell-size)] bg-repeat dark:bg-[linear-gradient(to_right,var(--dark-line)_1px,transparent_0),linear-gradient(to_bottom,var(--dark-line)_1px,transparent_0)]"
+			class="animate-grid bg-size-[var(--cell-size)_var(--cell-size)] inset-[0%_0px] ml-[-200%] h-[300vh] w-[600vw] origin-[100%_0_0] bg-[linear-gradient(to_right,var(--light-line)_1px,transparent_0),linear-gradient(to_bottom,var(--light-line)_1px,transparent_0)] bg-repeat dark:bg-[linear-gradient(to_right,var(--dark-line)_1px,transparent_0),linear-gradient(to_bottom,var(--dark-line)_1px,transparent_0)]"
 		></div>
 	</div>
 	<div
-		class="absolute inset-0 bg-linear-to-t from-white to-transparent to-90% dark:from-black"
+		class="bg-linear-to-t absolute inset-0 from-white to-transparent to-90% dark:from-black"
 	></div>
 </div>

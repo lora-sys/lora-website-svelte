@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { getContext, onMount } from "svelte";
-	import { cn } from "$lib/utils";
-	import type { Snippet } from "svelte";
-	import type { HTMLButtonAttributes } from "svelte/elements";
-	import type { TreeViewElement } from "./file-tree.svelte";
+	import { getContext, onMount } from 'svelte';
+	import { cn } from '$lib/utils';
+	import type { Snippet } from 'svelte';
+	import type { HTMLButtonAttributes } from 'svelte/elements';
+	import type { TreeViewElement } from './file-tree.svelte';
 
 	interface CollapseButtonProps extends HTMLButtonAttributes {
 		/**
@@ -41,8 +41,8 @@
 		indicator: boolean;
 		openIcon?: Snippet;
 		closeIcon?: Snippet;
-		direction: "rtl" | "ltr";
-	}>("tree");
+		direction: 'rtl' | 'ltr';
+	}>('tree');
 
 	const expendAllTree = (elements: TreeViewElement[]) => {
 		const expandTree = (element: TreeViewElement) => {
@@ -81,7 +81,7 @@
 
 <button
 	type="button"
-	class={cn("hover:bg-muted absolute right-2 bottom-1 h-8 w-fit rounded-md p-1", className)}
+	class={cn('absolute bottom-1 right-2 h-8 w-fit rounded-md p-1 hover:bg-muted', className)}
 	onclick={handleClick}
 	{...props}
 >

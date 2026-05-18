@@ -17,10 +17,10 @@
 		keywords: data.meta?.categories?.join(', ') ?? '',
 		author: { '@type': 'Person', name: 'lora-sys' }
 	});
-	const ldJsonTag = '<script type="application/ld+json">' + ldJson + '<\/script>';
+	const ldJsonTag = '<script type="application/ld+json">' + ldJson + '<' + '/script>';
 
 	// Extract headings for TOC — read actual DOM ids (set after mount when content renders)
-	let toc = $state<Array<{id: string; text: string; level: number}>>([]);
+	let toc = $state<Array<{ id: string; text: string; level: number }>>([]);
 
 	let activeHeading = $state('');
 	let tocDrawerOpen = $state(false);
@@ -31,7 +31,9 @@
 
 		// Small delay to let async/mdsvex content render headings with ids
 		const timer = setTimeout(() => {
-			const headings = document.querySelectorAll('article h1, article h2, article h3, article h4, article h5, article h6');
+			const headings = document.querySelectorAll(
+				'article h1, article h2, article h3, article h4, article h5, article h6'
+			);
 			toc = Array.from(headings).map((h) => ({
 				id: h.id || '',
 				text: h.textContent || '',
@@ -71,10 +73,14 @@
 					try {
 						await navigator.clipboard.writeText(code);
 						btn.textContent = 'Copied!';
-						setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+						setTimeout(() => {
+							btn.textContent = 'Copy';
+						}, 2000);
 					} catch {
 						btn.textContent = 'Failed';
-						setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+						setTimeout(() => {
+							btn.textContent = 'Copy';
+						}, 2000);
 					}
 				};
 				pre.style.position = 'relative';
@@ -142,7 +148,8 @@
 						{data.meta?.title ?? ''}
 					</h1>
 					<p class="font-mono text-sm text-muted-foreground">
-						{data.meta?.date ? formatDate(data.meta.date) : ''} / by {data.meta?.author ?? 'lora-sys'}
+						{data.meta?.date ? formatDate(data.meta.date) : ''} / by {data.meta?.author ??
+							'lora-sys'}
 					</p>
 				</hgroup>
 
@@ -161,7 +168,12 @@
 							stroke="currentColor"
 							viewBox="0 0 24 24"
 						>
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"
+							/>
 						</svg>
 					</button>
 
@@ -173,8 +185,8 @@
 									onclick={() => (tocDrawerOpen = false)}
 									class="block rounded px-2 py-1.5 font-mono text-sm transition-colors
 										{activeHeading === heading.id
-											? 'bg-term-green/10 text-term-green'
-											: 'text-muted-foreground hover:text-foreground'}"
+										? 'bg-term-green/10 text-term-green'
+										: 'text-muted-foreground hover:text-foreground'}"
 									style="padding-left: {(heading.level - 1) * 0.75}rem;"
 								>
 									{#if heading.level > 1}
@@ -196,7 +208,7 @@
 						prose-p:text-base prose-p:leading-relaxed
 						prose-a:text-term-green prose-a:no-underline hover:prose-a:underline
 						prose-blockquote:border-l-term-green prose-blockquote:text-muted-foreground
-						prose-code:font-mono prose-code:text-sm prose-code:bg-muted/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+						prose-code:rounded prose-code:bg-muted/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm
 						prose-pre:border prose-pre:border-border/50 prose-pre:bg-term-bg
 						prose-img:rounded-xl prose-img:shadow-lg"
 				>
@@ -206,10 +218,7 @@
 				<!-- Footer -->
 				<Separator class="my-8 border-border/50" />
 				<div class="flex items-center justify-between font-mono text-sm text-muted-foreground">
-					<a
-						href="/blog"
-						class="flex items-center gap-1 transition-colors hover:text-term-green"
-					>
+					<a href="/blog" class="flex items-center gap-1 transition-colors hover:text-term-green">
 						<span class="text-term-green">$</span> cd ../blog
 					</a>
 					<span>by {data.meta?.author ?? 'lora-sys'}</span>
@@ -222,9 +231,21 @@
 			<aside class="hidden w-64 shrink-0 lg:block">
 				<div class="sticky top-24">
 					<div class="rounded-xl border border-border/50 bg-card/30 p-4 backdrop-blur-sm">
-						<h3 class="mb-3 flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
-							<svg class="h-3.5 w-3.5 text-term-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+						<h3
+							class="mb-3 flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground"
+						>
+							<svg
+								class="h-3.5 w-3.5 text-term-green"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+								/>
 							</svg>
 							Table of Contents
 						</h3>
@@ -234,8 +255,8 @@
 									href="#{heading.id}"
 									class="flex items-center gap-1 rounded-md px-2 py-1.5 font-mono text-xs transition-all duration-200
 										{activeHeading === heading.id
-											? 'bg-term-green/10 text-term-green font-medium'
-											: 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'}"
+										? 'bg-term-green/10 font-medium text-term-green'
+										: 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'}"
 									style="padding-left: {(heading.level - 1) * 0.625 + 0.5}rem;"
 								>
 									{#if heading.level > 1}

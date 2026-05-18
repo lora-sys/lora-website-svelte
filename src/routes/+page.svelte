@@ -1,7 +1,7 @@
 <script lang="ts">
 	import BlurFade from '$lib/components/magic/BlurFade.svelte';
 	import AnimeSection from '$lib/components/portfolio/AnimeSection.svelte';
-import EduCard from '$lib/components/portfolio/EduCard.svelte';
+	import EduCard from '$lib/components/portfolio/EduCard.svelte';
 	import LsCard from '$lib/components/portfolio/LsCard.svelte';
 	import LogCard from '$lib/components/portfolio/LogCard.svelte';
 	import Badge from '$lib/components/ui/badge/badge.svelte';
@@ -15,7 +15,6 @@ import EduCard from '$lib/components/portfolio/EduCard.svelte';
 	import InteractiveHoverButton from '$lib/components/magic/interactive-hover-button/interactive-hover-button.svelte';
 
 	let BLUR_FADE_DELAY = 0.04;
-
 
 	// Skill icon image URLs for Icon Cloud
 	const skillImages = [
@@ -40,7 +39,6 @@ import EduCard from '$lib/components/portfolio/EduCard.svelte';
 		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg',
 		'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg'
 	];
-
 </script>
 
 <svelte:head>
@@ -77,7 +75,9 @@ import EduCard from '$lib/components/portfolio/EduCard.svelte';
 	<!-- ==================== ABOUT ==================== -->
 	<section id="about">
 		<BlurFade delay={BLUR_FADE_DELAY}>
-			<div class="mb-4 inline-block rounded-full border border-zinc-800 bg-zinc-900/50 px-4 py-2 font-mono text-xs text-emerald-400">
+			<div
+				class="mb-4 inline-block rounded-full border border-zinc-800 bg-zinc-900/50 px-4 py-2 font-mono text-xs text-emerald-400"
+			>
 				<span class="text-zinc-500">~/</span>whoami
 			</div>
 		</BlurFade>
@@ -211,7 +211,7 @@ import EduCard from '$lib/components/portfolio/EduCard.svelte';
 			</BlurFade>
 
 			<div class="grid w-full auto-rows-[28rem] grid-cols-1 gap-4 md:grid-cols-2">
-				{#each DATA.projects as project, id}
+				{#each DATA.projects as project}
 					<TerminalCard
 						title={project.title}
 						description={project.description}
@@ -246,7 +246,9 @@ import EduCard from '$lib/components/portfolio/EduCard.svelte';
 				</div>
 			</BlurFade>
 			<BlurFade delay={BLUR_FADE_DELAY * 2}>
-				<div class="overflow-hidden rounded-lg border border-zinc-800 bg-zinc-950/50 p-3 font-mono text-xs">
+				<div
+					class="overflow-hidden rounded-lg border border-zinc-800 bg-zinc-950/50 p-3 font-mono text-xs"
+				>
 					{#each DATA.hackathons as project, idx}
 						<BlurFade delay={BLUR_FADE_DELAY}>
 							<LogCard
@@ -310,7 +312,9 @@ import EduCard from '$lib/components/portfolio/EduCard.svelte';
 					</p>
 					<div class="flex justify-center pt-4">
 						<a href={DATA.contact.social.X.url} target="_blank" rel="noopener noreferrer">
-							<InteractiveHoverButton class="rounded-full border border-zinc-700 bg-zinc-800/50 px-8 py-3 font-mono text-sm text-emerald-400">
+							<InteractiveHoverButton
+								class="rounded-full border border-zinc-700 bg-zinc-800/50 px-8 py-3 font-mono text-sm text-emerald-400"
+							>
 								Say Hello
 							</InteractiveHoverButton>
 						</a>
@@ -348,7 +352,8 @@ import EduCard from '$lib/components/portfolio/EduCard.svelte';
 				{/each}
 			</div>
 			<p class="font-mono text-xs text-zinc-400">
-				&copy; {new Date().getFullYear()} {DATA.name}. Built with SvelteKit & MagicUI.
+				&copy; {new Date().getFullYear()}
+				{DATA.name}. Built with SvelteKit & MagicUI.
 			</p>
 		</div>
 	</footer>

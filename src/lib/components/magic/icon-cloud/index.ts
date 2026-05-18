@@ -1,1 +1,1 @@
-export { default as IconCloud } from "./icon-cloud.svelte";
+export { default as IconCloud } from './icon-cloud.svelte';

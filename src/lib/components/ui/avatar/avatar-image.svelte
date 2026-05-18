@@ -12,9 +12,4 @@
 	let { class: className = '', src, alt, loading = 'eager' }: Props = $props();
 </script>
 
-<AvatarPrimitive.Image
-	{src}
-	{alt}
-	class={cn('aspect-square h-full w-full', className)}
-	{loading}
-/>
+<AvatarPrimitive.Image {src} {alt} class={cn('aspect-square h-full w-full', className)} {loading} />

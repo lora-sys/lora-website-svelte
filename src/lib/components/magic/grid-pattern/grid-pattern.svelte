@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { cn } from "$lib/utils";
-	import type { SVGAttributes } from "svelte/elements";
+	import { cn } from '$lib/utils';
+	import type { SVGAttributes } from 'svelte/elements';
 
 	interface GridPatternProps extends SVGAttributes<SVGSVGElement> {
 		width?: number;
@@ -17,7 +17,7 @@
 		height = 40,
 		x = -1,
 		y = -1,
-		strokeDashArray = "0",
+		strokeDashArray = '0',
 		squares,
 		class: className,
 		...props
@@ -29,7 +29,7 @@
 <svg
 	aria-hidden="true"
 	class={cn(
-		"pointer-events-none absolute inset-0 h-full w-full fill-gray-400/30 stroke-gray-400/30",
+		'pointer-events-none absolute inset-0 h-full w-full fill-gray-400/30 stroke-gray-400/30',
 		className
 	)}
 	{...props}

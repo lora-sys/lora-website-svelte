@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { getContext } from "svelte";
-	import { cn } from "$lib/utils";
-	import { motion, AnimatePresence } from "motion-sv";
-	import type { Snippet } from "svelte";
-	import type { HTMLAttributes } from "svelte/elements";
+	import { getContext } from 'svelte';
+	import { cn } from '$lib/utils';
+	import { motion, AnimatePresence } from 'motion-sv';
+	import type { Snippet } from 'svelte';
+	import type { HTMLAttributes } from 'svelte/elements';
 
 	interface FolderProps extends HTMLAttributes<HTMLDivElement> {
 		/**
@@ -51,8 +51,8 @@
 		indicator: boolean;
 		openIcon?: Snippet;
 		closeIcon?: Snippet;
-		direction: "rtl" | "ltr";
-	}>("tree");
+		direction: 'rtl' | 'ltr';
+	}>('tree');
 
 	const isExpanded = $derived(context.expandedItems().includes(value));
 	const isSelected = $derived(isSelect ?? context.selectedId() === value);
@@ -65,10 +65,10 @@
 <div class="relative h-full overflow-hidden" {...props}>
 	<button
 		type="button"
-		class={cn("flex w-full items-center gap-1 rounded-md text-left text-sm", className, {
-			"bg-muted rounded-md": isSelected && isSelectable,
-			"cursor-pointer": isSelectable,
-			"cursor-not-allowed opacity-50": !isSelectable,
+		class={cn('flex w-full items-center gap-1 rounded-md text-left text-sm', className, {
+			'rounded-md bg-muted': isSelected && isSelectable,
+			'cursor-pointer': isSelectable,
+			'cursor-not-allowed opacity-50': !isSelectable
 		})}
 		disabled={!isSelectable}
 		onclick={() => context.handleExpand(value)}
@@ -89,15 +89,15 @@
 		{#if isExpanded}
 			<motion.div
 				initial={{ height: 0, opacity: 0 }}
-				animate={{ height: "auto", opacity: 1 }}
+				animate={{ height: 'auto', opacity: 1 }}
 				exit={{ height: 0, opacity: 0 }}
-				transition={{ duration: 0.2, ease: "easeInOut" }}
+				transition={{ duration: 0.2, ease: 'easeInOut' }}
 				class="relative overflow-hidden text-sm"
 			>
 				{#if element && context.indicator}
 					<div
 						dir={context.direction}
-						class="bg-muted absolute left-1.5 h-full w-px rounded-md py-3 duration-300 ease-in-out hover:bg-slate-300 rtl:right-1.5"
+						class="absolute left-1.5 h-full w-px rounded-md bg-muted py-3 duration-300 ease-in-out hover:bg-slate-300 rtl:right-1.5"
 						aria-hidden="true"
 					></div>
 				{/if}

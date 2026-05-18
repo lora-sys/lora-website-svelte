@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { cn } from "$lib/utils";
-	import { onMount } from "svelte";
+	import { cn } from '$lib/utils';
+	import { onMount } from 'svelte';
 
 	interface Props {
 		number?: number;
@@ -19,7 +19,7 @@
 		minDuration = 2,
 		maxDuration = 10,
 		angle = 215,
-		class: className,
+		class: className
 	}: Props = $props();
 
 	type MeteorStyle = {
@@ -34,12 +34,11 @@
 
 	let updateMeteors = () => {
 		const styles = [...new Array(number)].map(() => ({
-			angle: -angle + "deg",
-			top: "-5%",
+			angle: -angle + 'deg',
+			top: '-5%',
 			left: `calc(0% + ${Math.floor(Math.random() * window.innerWidth)}px)`,
-			animationDelay: Math.random() * (maxDelay - minDelay) + minDelay + "s",
-			animationDuration:
-				Math.floor(Math.random() * (maxDuration - minDuration) + minDuration) + "s",
+			animationDelay: Math.random() * (maxDelay - minDelay) + minDelay + 's',
+			animationDuration: Math.floor(Math.random() * (maxDuration - minDuration) + minDuration) + 's'
 		}));
 		meteorStyles = styles;
 	};
@@ -53,12 +52,12 @@
 	<span
 		style="--angle: {style.angle}; top: {style.top}; left: {style.left}; animation-delay: {style.animationDelay}; animation-duration: {style.animationDuration};"
 		class={cn(
-			"animate-meteor pointer-events-none absolute size-0.5 rotate-(--angle) rounded-full bg-zinc-500 shadow-[0_0_0_1px_#ffffff10]",
+			'animate-meteor rotate-(--angle) pointer-events-none absolute size-0.5 rounded-full bg-zinc-500 shadow-[0_0_0_1px_#ffffff10]',
 			className
 		)}
 	>
 		<div
-			class="pointer-events-none absolute top-1/2 -z-10 h-px w-12.5 -translate-y-1/2 bg-linear-to-r from-zinc-500 to-transparent"
+			class="w-12.5 bg-linear-to-r pointer-events-none absolute top-1/2 -z-10 h-px -translate-y-1/2 from-zinc-500 to-transparent"
 		></div>
 	</span>
 {/each}

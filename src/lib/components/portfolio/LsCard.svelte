@@ -21,7 +21,10 @@
 	let endStr = $derived(end?.toLowerCase().replace(/\s+/g, '') || '');
 	let companyDir = $derived(company?.toLowerCase().replace(/\s+/g, '-') || '');
 	let titleFile = $derived(
-		title?.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') || ''
+		title
+			?.toLowerCase()
+			.replace(/\s+/g, '-')
+			.replace(/[^a-z0-9-]/g, '') || ''
 	);
 </script>
 
@@ -71,7 +74,12 @@
 			{#if href}
 				<div class="mt-2 flex items-center gap-2 text-zinc-500">
 					<span class="text-emerald-400">$</span>
-					<a href={href} target="_blank" rel="noopener noreferrer" class="text-emerald-400 underline underline-offset-2 hover:text-emerald-300">
+					<a
+						{href}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-emerald-400 underline underline-offset-2 hover:text-emerald-300"
+					>
 						open {href.replace(/https?:\/\//, '')}
 					</a>
 				</div>

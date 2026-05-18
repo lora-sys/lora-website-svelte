@@ -1,12 +1,5 @@
 <script lang="ts">
-	let {
-		school = '',
-		degree = '',
-		start = '',
-		end = '',
-		logoUrl = '',
-		href = ''
-	} = $props();
+	let { school = '', degree = '', start = '', end = '', logoUrl = '', href = '' } = $props();
 
 	let expanded = $state(false);
 </script>
@@ -22,7 +15,9 @@
 	>
 		<!-- Logo icon -->
 		{#if logoUrl}
-			<div class="flex h-6 w-6 shrink-0 items-center justify-center overflow-hidden rounded-full bg-zinc-800">
+			<div
+				class="flex h-6 w-6 shrink-0 items-center justify-center overflow-hidden rounded-full bg-zinc-800"
+			>
 				<img src={logoUrl} alt={school} class="h-4 w-4 object-contain" loading="lazy" />
 			</div>
 		{:else}
@@ -38,7 +33,7 @@
 
 	<!-- File line: degree -->
 	<div
-		class="flex cursor-pointer items-baseline gap-2 rounded px-2 py-1 hover:bg-emerald-500/5 transition-colors"
+		class="flex cursor-pointer items-baseline gap-2 rounded px-2 py-1 transition-colors hover:bg-emerald-500/5"
 		onclick={() => degree && (expanded = !expanded)}
 		role="button"
 		tabindex="0"
@@ -52,10 +47,17 @@
 	</div>
 
 	{#if expanded && href}
-		<div class="my-1 ml-[calc(1.5rem+0.5rem+9ch+14ch)] overflow-hidden rounded border border-zinc-700 bg-zinc-900/50 px-3 py-2">
+		<div
+			class="my-1 ml-[calc(1.5rem+0.5rem+9ch+14ch)] overflow-hidden rounded border border-zinc-700 bg-zinc-900/50 px-3 py-2"
+		>
 			<div class="flex items-center gap-2 text-zinc-500">
 				<span class="text-emerald-400">$</span>
-				<a href={href} target="_blank" rel="noopener noreferrer" class="text-emerald-400 underline underline-offset-2 hover:text-emerald-300">
+				<a
+					{href}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-emerald-400 underline underline-offset-2 hover:text-emerald-300"
+				>
 					open {href.replace(/https?:\/\//, '')}
 				</a>
 			</div>

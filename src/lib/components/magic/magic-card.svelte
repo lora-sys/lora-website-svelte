@@ -9,7 +9,12 @@
 		glowColor?: string;
 	}
 
-	let { children, class: className, glowColor = 'rgba(34,197,94,0.15)', ...props }: Props = $props();
+	let {
+		children,
+		class: className,
+		glowColor = 'rgba(34,197,94,0.15)',
+		...props
+	}: Props = $props();
 
 	let mouseX = $state(0);
 	let mouseY = $state(0);

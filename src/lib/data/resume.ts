@@ -80,9 +80,10 @@ export const DATA = {
 		{ href: '#projects', icon: CodeIcon, label: 'Projects' }
 	],
 	anime: [
-    {
+		{
 			name: 'Made in Abyss',
-			quote: "I'll go even deeper. Even if it costs me my humanity, I want to see the truth of the Abyss.",
+			quote:
+				"I'll go even deeper. Even if it costs me my humanity, I want to see the truth of the Abyss.",
 			image: '/images/anime/made-in-abyss.jpg',
 			link: 'https://zh.wikipedia.org/wiki/%E4%BE%86%E8%87%AA%E6%B7%B1%E6%B7%B5',
 			buttonText: 'Learn More'

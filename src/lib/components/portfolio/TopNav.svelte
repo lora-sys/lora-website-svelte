@@ -31,7 +31,10 @@
 	<nav class="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
 		<!-- Left: Logo + Breadcrumb -->
 		<div class="flex items-center gap-6">
-			<a href="/" class="font-mono text-sm font-bold text-term-green transition-colors hover:text-gold">
+			<a
+				href="/"
+				class="font-mono text-sm font-bold text-term-green transition-colors hover:text-gold"
+			>
 				{DATA.name}<span class="animate-pulse">_</span>
 			</a>
 			<ul class="hidden items-center gap-1 sm:flex">
@@ -41,8 +44,8 @@
 							href={item.href}
 							class="rounded-md px-3 py-1.5 font-mono text-xs transition-all duration-200
 								{isActive(item.href)
-									? 'bg-term-green/10 text-term-green'
-									: 'text-muted-foreground hover:bg-muted hover:text-foreground'}"
+								? 'bg-term-green/10 text-term-green'
+								: 'text-muted-foreground hover:bg-muted hover:text-foreground'}"
 						>
 							{item.label}
 						</a>
@@ -65,9 +68,19 @@
 			>
 				<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					{#if mobileMenuOpen}
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M6 18L18 6M6 6l12 12"
+						/>
 					{:else}
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M4 6h16M4 12h16M4 18h16"
+						/>
 					{/if}
 				</svg>
 			</button>
@@ -85,8 +98,8 @@
 							onclick={closeMobileMenu}
 							class="block rounded-md px-3 py-2.5 font-mono text-sm transition-all duration-200
 								{isActive(item.href)
-									? 'bg-term-green/10 text-term-green'
-									: 'text-muted-foreground hover:bg-muted hover:text-foreground'}"
+								? 'bg-term-green/10 text-term-green'
+								: 'text-muted-foreground hover:bg-muted hover:text-foreground'}"
 						>
 							{item.label}
 						</a>

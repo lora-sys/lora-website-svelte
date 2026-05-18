@@ -40,9 +40,15 @@
 	<!-- Terminal Header -->
 	<div class="flex items-center gap-2 border-b border-zinc-800 bg-zinc-950/80 px-3 py-2">
 		<div class="flex gap-1.5">
-			<div class="h-2.5 w-2.5 rounded-full bg-red-500/80 transition-colors group-hover:bg-red-500"></div>
-			<div class="h-2.5 w-2.5 rounded-full bg-yellow-500/80 transition-colors group-hover:bg-yellow-500"></div>
-			<div class="h-2.5 w-2.5 rounded-full bg-green-500/80 transition-colors group-hover:bg-green-500"></div>
+			<div
+				class="h-2.5 w-2.5 rounded-full bg-red-500/80 transition-colors group-hover:bg-red-500"
+			></div>
+			<div
+				class="h-2.5 w-2.5 rounded-full bg-yellow-500/80 transition-colors group-hover:bg-yellow-500"
+			></div>
+			<div
+				class="h-2.5 w-2.5 rounded-full bg-green-500/80 transition-colors group-hover:bg-green-500"
+			></div>
 		</div>
 		<div class="flex-1 text-center">
 			<span class="font-mono text-[10px] text-zinc-500">{fileName}</span>
@@ -67,7 +73,7 @@
 		<!-- Video/Image Area -->
 		{#if video || image}
 			<div class="mb-3 overflow-hidden rounded-lg border border-zinc-800">
-				<a href={href} target="_blank" rel="noopener noreferrer" class="block">
+				<a {href} target="_blank" rel="noopener noreferrer" class="block">
 					{#if video}
 						<video
 							class="h-full w-full object-cover"
@@ -113,7 +119,7 @@
 			<span class="text-emerald-400">$</span>
 			<span class="ml-1">open </span>
 			<a
-				href={href}
+				{href}
 				target="_blank"
 				rel="noopener noreferrer"
 				class="text-emerald-400/80 underline decoration-emerald-500/30 underline-offset-2 transition-colors hover:text-emerald-400"

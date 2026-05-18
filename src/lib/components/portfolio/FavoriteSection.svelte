@@ -6,12 +6,16 @@
 <section id="favorites" class="py-12">
 	<div class="space-y-6">
 		<h2 class="text-2xl font-bold tracking-tight">Favorites</h2>
-		<div class="grid w-full auto-rows-[16rem] md:auto-rows-[20rem] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+		<div
+			class="grid w-full auto-rows-[16rem] grid-cols-1 gap-4 md:auto-rows-[20rem] md:grid-cols-2 lg:grid-cols-3"
+		>
 			{#each DATA.favorites as item}
 				{#if item.isSpotify}
 					<Dialog.Root>
 						<Dialog.Trigger class="w-full cursor-pointer border-0 bg-transparent p-0 text-left">
-							<div class="group relative flex h-full cursor-pointer flex-col justify-between overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-1">
+							<div
+								class="group relative flex h-full cursor-pointer flex-col justify-between overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-1"
+							>
 								<img
 									src={item.background}
 									alt={item.name}

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { motion } from "motion-sv";
-	import { cn } from "$lib/utils";
-	import type { AnimatedBeamProps } from "./types";
-	import { usePathCalculator } from "./use-path-calculator.svelte";
-	import { useGradientCoordinates } from "./use-gradient-coordinates.svelte";
-	import { useResizeObserver } from "./use-resize-observer.svelte";
+	import { motion } from 'motion-sv';
+	import { cn } from '$lib/utils';
+	import type { AnimatedBeamProps } from './types';
+	import { usePathCalculator } from './use-path-calculator.svelte';
+	import { useGradientCoordinates } from './use-gradient-coordinates.svelte';
+	import { useResizeObserver } from './use-resize-observer.svelte';
 
 	let {
 		class: className,
@@ -15,15 +15,15 @@
 		reverse = false,
 		duration = Math.random() * 3 + 4,
 		delay = 0,
-		pathColor = "gray",
+		pathColor = 'gray',
 		pathWidth = 2,
 		pathOpacity = 0.2,
-		gradientStartColor = "#ffaa40",
-		gradientStopColor = "#9c40ff",
+		gradientStartColor = '#ffaa40',
+		gradientStopColor = '#9c40ff',
 		startXOffset = 0,
 		startYOffset = 0,
 		endXOffset = 0,
-		endYOffset = 0,
+		endYOffset = 0
 	}: AnimatedBeamProps = $props();
 
 	// Generate unique ID for gradient
@@ -64,7 +64,7 @@
 	width={pathCalculator.svgDimensions.width}
 	height={pathCalculator.svgDimensions.height}
 	xmlns="http://www.w3.org/2000/svg"
-	class={cn("pointer-events-none absolute top-0 left-0 transform-gpu stroke-2", className)}
+	class={cn('pointer-events-none absolute left-0 top-0 transform-gpu stroke-2', className)}
 	viewBox={`0 0 ${pathCalculator.svgDimensions.width} ${pathCalculator.svgDimensions.height}`}
 >
 	<path
@@ -87,23 +87,23 @@
 			{id}
 			gradientUnits="userSpaceOnUse"
 			initial={{
-				x1: "0%",
-				x2: "0%",
-				y1: "0%",
-				y2: "0%",
+				x1: '0%',
+				x2: '0%',
+				y1: '0%',
+				y2: '0%'
 			}}
 			animate={{
 				x1: gradientCoordinates.x1,
 				x2: gradientCoordinates.x2,
 				y1: gradientCoordinates.y1,
-				y2: gradientCoordinates.y2,
+				y2: gradientCoordinates.y2
 			}}
 			transition={{
 				delay,
 				duration,
 				ease: [0.16, 1, 0.3, 1],
 				repeat: Infinity,
-				repeatDelay: 0,
+				repeatDelay: 0
 			}}
 		>
 			<stop stop-color={gradientStartColor} stop-opacity="0"></stop>

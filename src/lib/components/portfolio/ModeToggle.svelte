@@ -7,7 +7,7 @@
 
 <button
 	onclick={toggleMode}
-	class="overflow-hidden rounded-full focus-visible:ring-2 focus-visible:ring-ring/50 p-2"
+	class="overflow-hidden rounded-full p-2 focus-visible:ring-2 focus-visible:ring-ring/50"
 	aria-label="Toggle theme"
 >
 	<Sun

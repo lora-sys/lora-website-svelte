@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { cn } from "$lib/utils";
-	import type { HTMLAttributes } from "svelte/elements";
+	import { cn } from '$lib/utils';
+	import type { HTMLAttributes } from 'svelte/elements';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		borderWidth?: number;
@@ -11,14 +11,14 @@
 	let {
 		borderWidth = 1,
 		duration = 14,
-		shineColor = "#000000",
+		shineColor = '#000000',
 		class: className,
 		style,
 		...restProps
 	}: Props = $props();
 
 	let computedStyle = $derived.by(() => {
-		const shineColorValue = Array.isArray(shineColor) ? shineColor.join(",") : shineColor;
+		const shineColorValue = Array.isArray(shineColor) ? shineColor.join(',') : shineColor;
 
 		const baseStyles = `
 			--border-width: ${borderWidth}px;
@@ -40,7 +40,7 @@
 <div
 	style={computedStyle}
 	class={cn(
-		"motion-safe:animate-shine pointer-events-none absolute inset-0 size-full rounded-[inherit] will-change-[background-position]",
+		'motion-safe:animate-shine pointer-events-none absolute inset-0 size-full rounded-[inherit] will-change-[background-position]',
 		className
 	)}
 	{...restProps}

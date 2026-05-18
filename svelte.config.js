@@ -61,9 +61,10 @@ const config = {
 	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
 
 	kit: {
-		adapter: process.env.ADAPTER === 'static'
-			? adapterStatic({ pages: 'build', assets: 'build', fallback: '404.html' })
-			: adapterAuto()
+		adapter:
+			process.env.ADAPTER === 'static'
+				? adapterStatic({ pages: 'build', assets: 'build', fallback: '404.html' })
+				: adapterAuto()
 	}
 };
 

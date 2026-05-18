@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-	import type { Component } from "svelte";
+	import { onMount } from 'svelte';
+	import type { Component } from 'svelte';
 
 	interface Icon {
 		x: number;
@@ -17,7 +17,7 @@
 		class?: string;
 	}
 
-	let { icons, images, class: className = "" }: IconCloudProps = $props();
+	let { icons, images, class: className = '' }: IconCloudProps = $props();
 
 	let canvasRef: HTMLCanvasElement | null = $state(null);
 	let iconPositions = $state<Icon[]>([]);
@@ -51,15 +51,15 @@
 		imagesLoaded = new Array(items.length).fill(false);
 
 		const newIconCanvases = items.map((_item, index) => {
-			const offscreen = document.createElement("canvas");
+			const offscreen = document.createElement('canvas');
 			offscreen.width = 40;
 			offscreen.height = 40;
-			const offCtx = offscreen.getContext("2d");
+			const offCtx = offscreen.getContext('2d');
 
 			if (offCtx) {
 				if (images) {
 					const img = new Image();
-					img.crossOrigin = "anonymous";
+					img.crossOrigin = 'anonymous';
 					img.src = items[index] as string;
 					img.onload = () => {
 						offCtx.clearRect(0, 0, offscreen.width, offscreen.height);
@@ -101,7 +101,7 @@
 				z: z * 100,
 				scale: 1,
 				opacity: 1,
-				id: i,
+				id: i
 			});
 		}
 		iconPositions = newIcons;
@@ -114,7 +114,7 @@
 		const x = e.clientX - rect.left;
 		const y = e.clientY - rect.top;
 
-		const ctx = canvasRef.getContext("2d");
+		const ctx = canvasRef.getContext('2d');
 		if (!ctx) return;
 
 		for (const icon of iconPositions) {
@@ -154,7 +154,7 @@
 					startY: currentY,
 					distance,
 					startTime: performance.now(),
-					duration,
+					duration
 				};
 				return;
 			}
@@ -178,7 +178,7 @@
 
 			rotationRef = {
 				x: rotationRef.x + deltaY * 0.002,
-				y: rotationRef.y + deltaX * 0.002,
+				y: rotationRef.y + deltaX * 0.002
 			};
 
 			lastMousePos = { x: e.clientX, y: e.clientY };
@@ -192,7 +192,7 @@
 	// Animation and rendering
 	onMount(() => {
 		const canvas = canvasRef;
-		const ctx = canvas?.getContext("2d");
+		const ctx = canvas?.getContext('2d');
 		if (!canvas || !ctx) return;
 
 		const animate = () => {
@@ -212,12 +212,8 @@
 				const easedProgress = easeOutCubic(progress);
 
 				rotationRef = {
-					x:
-						targetRotation.startX +
-						(targetRotation.x - targetRotation.startX) * easedProgress,
-					y:
-						targetRotation.startY +
-						(targetRotation.y - targetRotation.startY) * easedProgress,
+					x: targetRotation.startX + (targetRotation.x - targetRotation.startX) * easedProgress,
+					y: targetRotation.startY + (targetRotation.y - targetRotation.startY) * easedProgress
 				};
 
 				if (progress >= 1) {
@@ -226,7 +222,7 @@
 			} else if (!isDragging) {
 				rotationRef = {
 					x: rotationRef.x + (dy / canvas.height) * speed,
-					y: rotationRef.y + (dx / canvas.width) * speed,
+					y: rotationRef.y + (dx / canvas.width) * speed
 				};
 			}
 
@@ -255,12 +251,12 @@
 				} else {
 					ctx.beginPath();
 					ctx.arc(0, 0, 20, 0, Math.PI * 2);
-					ctx.fillStyle = "#4444ff";
+					ctx.fillStyle = '#4444ff';
 					ctx.fill();
-					ctx.fillStyle = "white";
-					ctx.textAlign = "center";
-					ctx.textBaseline = "middle";
-					ctx.font = "16px Arial";
+					ctx.fillStyle = 'white';
+					ctx.textAlign = 'center';
+					ctx.textBaseline = 'middle';
+					ctx.font = '16px Arial';
 					ctx.fillText(`${icon.id + 1}`, 0, 0);
 				}
 

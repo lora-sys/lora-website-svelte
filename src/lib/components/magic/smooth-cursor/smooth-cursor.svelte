@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { motion, useSpring } from "motion-sv";
-	import type { Snippet } from "svelte";
-	import { onMount } from "svelte";
+	import { motion, useSpring } from 'motion-sv';
+	import type { Snippet } from 'svelte';
+	import { onMount } from 'svelte';
 
 	interface Position {
 		x: number;
@@ -24,11 +24,11 @@
 			damping: 45,
 			stiffness: 400,
 			mass: 1,
-			restDelta: 0.001,
-		},
+			restDelta: 0.001
+		}
 	}: SmoothCursorProps = $props();
 
-	let isMoving = $state(false);
+	let _isMoving = $state(false);
 	let lastMousePos = $state<Position>({ x: 0, y: 0 });
 	let velocity = $state<Position>({ x: 0, y: 0 });
 	let lastUpdateTime = $state(Date.now());
@@ -41,14 +41,14 @@
 		useSpring(0, {
 			...springConfig,
 			damping: 60,
-			stiffness: 300,
+			stiffness: 300
 		})
 	);
 	let scale = $derived(
 		useSpring(1, {
 			...springConfig,
 			damping: 35,
-			stiffness: 500,
+			stiffness: 500
 		})
 	);
 
@@ -59,7 +59,7 @@
 			if (deltaTime > 0) {
 				velocity = {
 					x: (currentPos.x - lastMousePos.x) / deltaTime,
-					y: (currentPos.y - lastMousePos.y) / deltaTime,
+					y: (currentPos.y - lastMousePos.y) / deltaTime
 				};
 			}
 			lastUpdateTime = currentTime;
@@ -83,10 +83,10 @@
 				rotation.set(accumulatedRotation);
 				previousAngle = currentAngle;
 				scale.set(0.95);
-				isMoving = true;
+				_isMoving = true;
 				const timeout = setTimeout(() => {
 					scale.set(1);
-					isMoving = false;
+					_isMoving = false;
 				}, 150);
 				return () => clearTimeout(timeout);
 			}
@@ -101,11 +101,11 @@
 			});
 		};
 
-		document.body.style.cursor = "none";
-		window.addEventListener("mousemove", throttledMouseMove);
+		document.body.style.cursor = 'none';
+		window.addEventListener('mousemove', throttledMouseMove);
 		return () => {
-			window.removeEventListener("mousemove", throttledMouseMove);
-			document.body.style.cursor = "auto";
+			window.removeEventListener('mousemove', throttledMouseMove);
+			document.body.style.cursor = 'auto';
 			if (rafId) cancelAnimationFrame(rafId);
 		};
 	});
@@ -113,23 +113,23 @@
 
 <motion.div
 	style={{
-		position: "fixed",
+		position: 'fixed',
 		left: cursorX,
 		top: cursorY,
-		translateX: "-50%",
-		translateY: "-50%",
+		translateX: '-50%',
+		translateY: '-50%',
 		rotate: rotation,
 		scale: scale,
 		zIndex: 100,
-		pointerEvents: "none",
-		willChange: "transform",
+		pointerEvents: 'none',
+		willChange: 'transform'
 	}}
 	initial={{ scale: 0 }}
 	animate={{ scale: 1 }}
 	transition={{
-		type: "spring",
+		type: 'spring',
 		stiffness: 400,
-		damping: 30,
+		damping: 30
 	}}
 >
 	{#if cursor}
@@ -174,15 +174,8 @@
 					<feOffset dy={2.25825} />
 					<feGaussianBlur stdDeviation={2.25825} />
 					<feComposite in2="hardAlpha" operator="out" />
-					<feColorMatrix
-						type="matrix"
-						values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"
-					/>
-					<feBlend
-						mode="normal"
-						in2="BackgroundImageFix"
-						result="effect1_dropShadow_91_7928"
-					/>
+					<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0" />
+					<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_91_7928" />
 					<feBlend
 						mode="normal"
 						in="SourceGraphic"

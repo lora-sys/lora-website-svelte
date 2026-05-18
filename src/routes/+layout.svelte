@@ -56,7 +56,7 @@
 
 <Tooltip.Provider>
 	<TopNav />
-	<div class="relative mx-auto min-h-screen max-w-5xl px-6 pt-20 pb-12 antialiased sm:pb-24">
+	<div class="relative mx-auto min-h-screen max-w-5xl px-6 pb-12 pt-20 antialiased sm:pb-24">
 		{@render children?.()}
 	</div>
 </Tooltip.Provider>

@@ -1,2 +1,2 @@
-import ShineBorder from "./shine-border.svelte";
+import ShineBorder from './shine-border.svelte';
 export { ShineBorder };

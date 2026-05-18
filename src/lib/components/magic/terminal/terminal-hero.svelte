@@ -14,13 +14,24 @@
 
 	let commandInput = $state('');
 	let commandHistory = $state<string[]>([]);
-	let konamiIndex = $state(0);
+	let _konamiIndex = $state(0);
 	let toastMessage = $state('');
 	let showToast = $state(false);
 	let bootComplete = $state(false);
 	let inputEl: HTMLInputElement | undefined = $state();
 
-	const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+	const _KONAMI_CODE = [
+		'ArrowUp',
+		'ArrowUp',
+		'ArrowDown',
+		'ArrowDown',
+		'ArrowLeft',
+		'ArrowRight',
+		'ArrowLeft',
+		'ArrowRight',
+		'b',
+		'a'
+	];
 
 	const bootLines = [
 		'Initializing system...',
@@ -36,7 +47,9 @@
 	function showToastMsg(msg: string) {
 		toastMessage = msg;
 		showToast = true;
-		setTimeout(() => { showToast = false; }, 2000);
+		setTimeout(() => {
+			showToast = false;
+		}, 2000);
 	}
 
 	async function copyToClipboard(text: string) {
@@ -116,7 +129,7 @@
 		} else if (trimmed.startsWith('copy ')) {
 			const name = trimmed.split(' ').slice(1).join(' ');
 			const social = Object.values(DATA.contact.social).find(
-				s => s.name.toLowerCase() === name.toLowerCase()
+				(s) => s.name.toLowerCase() === name.toLowerCase()
 			);
 			if (social) {
 				copyToClipboard(social.url);
@@ -132,7 +145,7 @@
 				'      |:_/ |       Host: SvelteKit + MagicUI',
 				'     //   \\ \\      Kernel: TypeScript 5.x',
 				'    (|     | )     Shell: terminal-hero',
-				`   /\'\\_   _/\'\\     Resolution: responsive`,
+				"   /'\\_   _/'\\     Resolution: responsive",
 				'   \\___)=(___/     Theme: terminal-geek'
 			];
 		} else if (trimmed === 'clear') {
@@ -197,11 +210,17 @@
 		<div class="flex items-center gap-2 border-b border-border/50 bg-zinc-950 px-4 py-2.5">
 			<div class="flex gap-1.5">
 				<div class="h-3 w-3 rounded-full bg-red-500/80 transition-colors hover:bg-red-500"></div>
-				<div class="h-3 w-3 rounded-full bg-yellow-500/80 transition-colors hover:bg-yellow-500"></div>
-				<div class="h-3 w-3 rounded-full bg-green-500/80 transition-colors hover:bg-green-500"></div>
+				<div
+					class="h-3 w-3 rounded-full bg-yellow-500/80 transition-colors hover:bg-yellow-500"
+				></div>
+				<div
+					class="h-3 w-3 rounded-full bg-green-500/80 transition-colors hover:bg-green-500"
+				></div>
 			</div>
 			<div class="flex-1 text-center">
-				<span class="font-mono text-xs text-muted-foreground">guest@portfolio ~ /home/{DATA.name}</span>
+				<span class="font-mono text-xs text-muted-foreground"
+					>guest@portfolio ~ /home/{DATA.name}</span
+				>
 			</div>
 			<div class="w-12"></div>
 		</div>
@@ -209,13 +228,13 @@
 		<!-- Terminal Body -->
 		<div class="min-h-[20rem] p-4 font-mono text-sm">
 			<!-- Command History -->
-			<div class="mb-4 max-h-72 space-y-0.5 overflow-x-hidden overflow-y-auto scrollbar-thin">
+			<div class="scrollbar-thin mb-4 max-h-72 space-y-0.5 overflow-y-auto overflow-x-hidden">
 				{#each commandHistory as line, idx (idx)}
 					<div
 						class="whitespace-pre-wrap {line.startsWith('$')
-							? 'text-foreground font-bold'
+							? 'font-bold text-foreground'
 							: line.startsWith('>')
-								? 'text-emerald-400 animate-[fadeIn_0.3s_ease-out]'
+								? 'animate-[fadeIn_0.3s_ease-out] text-emerald-400'
 								: 'text-muted-foreground'}"
 					>
 						{line}
@@ -244,32 +263,40 @@
 		</div>
 
 		<!-- Border Beam -->
-		<BorderBeam
-			size={180}
-			colorFrom="var(--emerald-400, #34d399)"
-			colorTo="#9c40ff"
-			duration={8}
-		/>
+		<BorderBeam size={180} colorFrom="var(--emerald-400, #34d399)" colorTo="#9c40ff" duration={8} />
 	</MagicCard>
 
 	<!-- Toast -->
 	{#if showToast}
 		<div class="fixed bottom-24 left-1/2 z-50 -translate-x-1/2 animate-[slideUp_0.3s_ease-out]">
-			<div class="rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-2 font-mono text-sm text-emerald-400 shadow-lg shadow-emerald-500/10">
+			<div
+				class="rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-2 font-mono text-sm text-emerald-400 shadow-lg shadow-emerald-500/10"
+			>
 				{toastMessage}
 			</div>
 		</div>
 	{/if}
-
-	</div>
+</div>
 
 <style>
 	@keyframes fadeIn {
-		from { opacity: 0; transform: translateY(4px); }
-		to { opacity: 1; transform: translateY(0); }
+		from {
+			opacity: 0;
+			transform: translateY(4px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 	@keyframes slideUp {
-		from { opacity: 0; transform: translate(-50%, 10px); }
-		to { opacity: 1; transform: translate(-50%, 0); }
+		from {
+			opacity: 0;
+			transform: translate(-50%, 10px);
+		}
+		to {
+			opacity: 1;
+			transform: translate(-50%, 0);
+		}
 	}
 </style>

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { getContext } from "svelte";
-	import { cn } from "$lib/utils";
-	import type { Snippet } from "svelte";
-	import type { HTMLButtonAttributes } from "svelte/elements";
+	import { getContext } from 'svelte';
+	import { cn } from '$lib/utils';
+	import type { Snippet } from 'svelte';
+	import type { HTMLButtonAttributes } from 'svelte/elements';
 
 	interface FileProps extends HTMLButtonAttributes {
 		value: string;
@@ -32,8 +32,8 @@
 		indicator: boolean;
 		openIcon?: Snippet;
 		closeIcon?: Snippet;
-		direction: "rtl" | "ltr";
-	}>("tree");
+		direction: 'rtl' | 'ltr';
+	}>('tree');
 
 	const isSelected = $derived(isSelect ?? context.selectedId() === value);
 
@@ -45,12 +45,12 @@
 	type="button"
 	disabled={!isSelectable}
 	class={cn(
-		"flex w-fit items-center gap-1 rounded-md pr-1 text-sm duration-200 ease-in-out rtl:pr-0 rtl:pl-1",
+		'flex w-fit items-center gap-1 rounded-md pr-1 text-sm duration-200 ease-in-out rtl:pl-1 rtl:pr-0',
 		{
-			"bg-muted": isSelected && isSelectable,
+			'bg-muted': isSelected && isSelectable
 		},
-		isSelectable ? "cursor-pointer" : "cursor-not-allowed opacity-50",
-		context.direction === "rtl" ? "rtl" : "ltr",
+		isSelectable ? 'cursor-pointer' : 'cursor-not-allowed opacity-50',
+		context.direction === 'rtl' ? 'rtl' : 'ltr',
 		className
 	)}
 	onclick={() => context.selectItem(value)}

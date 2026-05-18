@@ -7,7 +7,7 @@
 		descriptionHtml,
 		dates = '',
 		location = '',
-		image = '',
+		_image = '',
 		links = [],
 		pid
 	}: {
@@ -36,7 +36,9 @@
 		<span class="shrink-0 text-zinc-400">[{dates}]</span>
 		<span class="shrink-0 text-zinc-500">hackathond[{pid}]:</span>
 		<span class="shrink-0 font-semibold text-emerald-400">{title}</span>
-		<span class="inline-flex items-center gap-1 rounded border border-emerald-500/20 bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400">
+		<span
+			class="inline-flex items-center gap-1 rounded border border-emerald-500/20 bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400"
+		>
 			STATUS: participated
 		</span>
 	</div>
@@ -62,7 +64,10 @@
 					<div class="flex flex-wrap gap-1.5">
 						{#each links as link}
 							<a href={link.href} target="_blank" rel="noopener noreferrer">
-								<Badge variant="secondary" class="border-zinc-700 bg-zinc-800 font-mono text-[10px] text-zinc-300">
+								<Badge
+									variant="secondary"
+									class="border-zinc-700 bg-zinc-800 font-mono text-[10px] text-zinc-300"
+								>
 									{link.title}
 								</Badge>
 							</a>

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { cn } from "$lib/utils";
-	import type { Snippet } from "svelte";
+	import { cn } from '$lib/utils';
+	import type { Snippet } from 'svelte';
 
 	type AnimatedGradientTextProps = {
 		speed?: number;
@@ -13,10 +13,10 @@
 
 	let {
 		speed = 1,
-		colorFrom = "#ffaa40",
-		colorTo = "#9c40ff",
+		colorFrom = '#ffaa40',
+		colorTo = '#9c40ff',
 		children,
-		class: className = "",
+		class: className = '',
 		...rest
 	}: AnimatedGradientTextProps = $props();
 </script>
@@ -25,7 +25,7 @@
 	style="--color-from:{colorFrom}; --color-to:{colorTo}; --bg-size:{300 * speed}%"
 	{...rest}
 	class={cn(
-		`animate-gradient inline bg-linear-to-r from-(--color-from) via-(--color-to) to-(--color-from) bg-size-[var(--bg-size)_100%] bg-clip-text text-transparent`,
+		`animate-gradient bg-linear-to-r from-(--color-from) via-(--color-to) to-(--color-from) bg-size-[var(--bg-size)_100%] inline bg-clip-text text-transparent`,
 		className
 	)}
 >

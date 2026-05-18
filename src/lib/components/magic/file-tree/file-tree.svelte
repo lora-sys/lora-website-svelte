@@ -8,10 +8,10 @@
 </script>
 
 <script lang="ts">
-	import { setContext, getContext } from "svelte";
-	import { cn } from "$lib/utils";
-	import type { Snippet } from "svelte";
-	import type { HTMLAttributes } from "svelte/elements";
+	import { setContext } from 'svelte';
+	import { cn } from '$lib/utils';
+	import type { Snippet } from 'svelte';
+	import type { HTMLAttributes } from 'svelte/elements';
 
 	interface TreeProps extends HTMLAttributes<HTMLDivElement> {
 		/**
@@ -41,7 +41,7 @@
 		/**
 		 * Text direction
 		 */
-		dir?: "rtl" | "ltr";
+		dir?: 'rtl' | 'ltr';
 		/**
 		 * Children content
 		 */
@@ -55,11 +55,11 @@
 	let {
 		initialSelectedId,
 		initialExpandedItems = [],
-		elements,
+		_elements,
 		indicator = true,
 		openIcon,
 		closeIcon,
-		dir = "ltr",
+		dir = 'ltr',
 		children,
 		class: className,
 		...props
@@ -84,9 +84,9 @@
 		expandedItems = items;
 	};
 
-	const direction = dir === "rtl" ? "rtl" : "ltr";
+	const direction = dir === 'rtl' ? 'rtl' : 'ltr';
 
-	setContext("tree", {
+	setContext('tree', {
 		selectedId: () => selectedId,
 		expandedItems: () => expandedItems,
 		handleExpand,
@@ -95,11 +95,11 @@
 		indicator,
 		openIcon,
 		closeIcon,
-		direction,
+		direction
 	});
 </script>
 
-<div class={cn("size-full", className)} {...props}>
+<div class={cn('size-full', className)} {...props}>
 	<div class="relative h-full overflow-auto px-2" dir={direction}>
 		<div class="flex flex-col gap-1">
 			{@render children()}

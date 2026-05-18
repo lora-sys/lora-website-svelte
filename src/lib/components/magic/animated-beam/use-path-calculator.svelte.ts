@@ -1,7 +1,7 @@
-import type { PathDimensions } from "./types";
+import type { PathDimensions } from './types';
 
 export function usePathCalculator() {
-	let pathD = $state("");
+	let pathD = $state('');
 	let svgDimensions = $state<PathDimensions>({ width: 0, height: 0 });
 
 	function calculatePath(
@@ -41,6 +41,6 @@ export function usePathCalculator() {
 		get svgDimensions() {
 			return svgDimensions;
 		},
-		calculatePath,
+		calculatePath
 	};
 }
