@@ -112,3 +112,9 @@ Blog posts are Markdown files in `src/content/` with YAML frontmatter (`title`, 
 - If a test fails, run `node scripts/analyze.js` first to identify the source of the error.
 - Suspend changing service code until the source of error is confirmed.
 - For runtime errors, use **agent-browser** to reproduce: open the page, run `console --level error`, take a screenshot.
+
+
+## MUST
+
+More use rtk 
+example : rtk git status, rtk git add, rtk git commit, rtk git push, rtk pnpm run build, rtk pnpm run dev, rtk pnpm run check, rtk pnpm run lint, rtk pnpm run format

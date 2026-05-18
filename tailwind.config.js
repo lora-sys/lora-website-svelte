@@ -51,22 +51,23 @@ const config = {
 				card: {
 					DEFAULT: 'hsl(var(--card) / <alpha-value>)',
 					foreground: 'hsl(var(--card-foreground) / <alpha-value>)'
+				},
+				term: {
+					bg: '#07070a',
+					main: '#111116',
+					green: '#22c55e',
+					dim: '#6b7280'
 				}
-			},
-			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
 				sans: ['"Space Grotesk"', ...fontFamily.sans],
 				heading: ['"Syne"', ...fontFamily.sans],
 				serif: fontFamily.serif,
-				mono: ['"Fragment Mono"', ...fontFamily.mono]
+				mono: ['"JetBrains Mono"', '"Fira Code"', ...fontFamily.mono]
 			}
 		}
 	},
-	plugins: [require('@tailwindcss/typography')]
+	plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate')]
 };
 
 export default config;

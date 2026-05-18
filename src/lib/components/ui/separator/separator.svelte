@@ -2,19 +2,16 @@
 	import { Separator as SeparatorPrimitive } from 'bits-ui';
 	import { cn } from '$lib/utils.js';
 
-	type $$Props = SeparatorPrimitive.Props;
-
 	interface Props {
-		class?: $$Props['class'];
-		orientation?: $$Props['orientation'];
-		decorative?: $$Props['decorative'];
-		[key: string]: any;
+		class?: string;
+		orientation?: 'horizontal' | 'vertical';
+		decorative?: boolean;
 	}
 
 	let {
 		class: className = undefined,
 		orientation = 'horizontal',
-		decorative = undefined,
+		decorative = true,
 		...rest
 	}: Props = $props();
 </script>

@@ -11,6 +11,6 @@
 	let { children, class: className, ...props }: BentoGridProps = $props();
 </script>
 
-<div class={cn('grid w-full auto-rows-[28rem] grid-cols-3 gap-4', className)} {...props}>
+<div class={cn('grid w-full auto-rows-[28rem] grid-cols-1 md:grid-cols-2 gap-4', className)} {...props}>
 	{@render children()}
 </div>
