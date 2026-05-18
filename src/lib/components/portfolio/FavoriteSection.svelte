@@ -1,43 +1,28 @@
 <script lang="ts">
-	import { BentoGrid, BentoCard } from '$lib/components/magic/bento-grid';
 	import { DATA } from '$lib/data/resume';
 	import * as Dialog from '$lib/components/ui/dialog';
-
-	const gridClasses = [
-		'lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3',
-		'lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3',
-		'lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4',
-		'lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2',
-		'lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4'
-	];
 </script>
 
 <section id="favorites" class="py-12">
 	<div class="space-y-6">
 		<h2 class="text-2xl font-bold tracking-tight">Favorites</h2>
-		<BentoGrid class="lg:grid-rows-3">
-			{#each DATA.favorites as item, i}
+		<div class="grid w-full auto-rows-[16rem] md:auto-rows-[20rem] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+			{#each DATA.favorites as item}
 				{#if item.isSpotify}
 					<Dialog.Root>
-						<Dialog.Trigger>
-							<div class={gridClasses[i] || ''}>
-								<BentoCard
-									name={item.name}
-									description={item.description}
-									href="#"
-									cta={item.cta}
-									Icon={item.icon}
-								>
-									{#snippet background()}
-										<img
-											src={item.background}
-											alt={item.name}
-											class="absolute inset-0 h-full w-full object-cover"
-											loading="lazy"
-											decoding="async"
-										/>
-									{/snippet}
-								</BentoCard>
+						<Dialog.Trigger class="w-full cursor-pointer border-0 bg-transparent p-0 text-left">
+							<div class="group relative flex h-full cursor-pointer flex-col justify-between overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-1">
+								<img
+									src={item.background}
+									alt={item.name}
+									class="absolute inset-0 h-full w-full object-cover"
+									loading="lazy"
+									decoding="async"
+								/>
+								<div class="bg-gradient-to-b from-black/80 via-black/50 to-transparent p-4">
+									<item.icon class="h-10 w-10 font-bold text-yellow-400" />
+									<h3 class="mt-2 text-xl font-bold text-foreground">{item.name}</h3>
+								</div>
 							</div>
 						</Dialog.Trigger>
 						<Dialog.Content class="max-h-[80vh] overflow-y-auto">
@@ -60,26 +45,24 @@
 						</Dialog.Content>
 					</Dialog.Root>
 				{:else}
-					<BentoCard
-						name={item.name}
-						description={item.description}
-						href={item.href}
-						cta={item.cta}
-						Icon={item.icon}
-						class={gridClasses[i] || ''}
+					<a
+						href={item.href || '#'}
+						class="group relative flex h-full flex-col justify-between overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-1"
 					>
-						{#snippet background()}
-							<img
-								src={item.background}
-								alt={item.name}
-								class="absolute inset-0 h-full w-full object-cover"
-								loading="lazy"
-								decoding="async"
-							/>
-						{/snippet}
-					</BentoCard>
+						<img
+							src={item.background}
+							alt={item.name}
+							class="absolute inset-0 h-full w-full object-cover"
+							loading="lazy"
+							decoding="async"
+						/>
+						<div class="bg-gradient-to-b from-black/80 via-black/50 to-transparent p-4">
+							<item.icon class="h-10 w-10 font-bold text-yellow-400" />
+							<h3 class="mt-2 text-xl font-bold text-foreground">{item.name}</h3>
+						</div>
+					</a>
 				{/if}
 			{/each}
-		</BentoGrid>
+		</div>
 	</div>
 </section>

@@ -19,51 +19,41 @@
 	});
 	const ldJsonTag = '<script type="application/ld+json">' + ldJson + '<\/script>';
 
-	// Extract headings for TOC - only run on client
-	let toc = $derived.by(() => {
-		if (typeof document === 'undefined') return [];
-		if (!data.content) return [];
-		const tempDiv = document.createElement('div');
-		tempDiv.innerHTML = data.content;
-		const headings = tempDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
-		return Array.from(headings).map((h) => ({
-			id:
-				h.id ||
-				h.textContent
-					?.toLowerCase()
-					.replace(/\s+/g, '-')
-					.replace(/[^\w-]/g, '') ||
-				'',
-			text: h.textContent || '',
-			level: parseInt(h.tagName.charAt(1))
-		}));
-	});
+	// Extract headings for TOC — read actual DOM ids (set after mount when content renders)
+	let toc = $state<Array<{id: string; text: string; level: number}>>([]);
 
 	let activeHeading = $state('');
 	let tocDrawerOpen = $state(false);
 
 	// Track active heading on scroll
 	onMount(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						activeHeading = entry.target.id;
-					}
-				}
-			},
-			{ rootMargin: '-80px 0px -60% 0px', threshold: 0.1 }
-		);
+		let observer: IntersectionObserver | undefined;
 
-		// Observe all headings in the article
+		// Small delay to let async/mdsvex content render headings with ids
 		const timer = setTimeout(() => {
 			const headings = document.querySelectorAll('article h1, article h2, article h3, article h4, article h5, article h6');
-			headings.forEach((h) => observer.observe(h));
+			toc = Array.from(headings).map((h) => ({
+				id: h.id || '',
+				text: h.textContent || '',
+				level: parseInt(h.tagName.charAt(1))
+			}));
+
+			observer = new IntersectionObserver(
+				(entries) => {
+					for (const entry of entries) {
+						if (entry.isIntersecting) {
+							activeHeading = entry.target.id;
+						}
+					}
+				},
+				{ rootMargin: '-80px 0px -60% 0px', threshold: 0.1 }
+			);
+			headings.forEach((h) => observer!.observe(h));
 		}, 100);
 
 		return () => {
 			clearTimeout(timer);
-			observer.disconnect();
+			observer?.disconnect();
 		};
 	});
 

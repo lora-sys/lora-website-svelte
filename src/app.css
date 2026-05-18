@@ -232,7 +232,7 @@
 	animation: gradient var(--duration, 3s) ease infinite;
 }
 
-/* Code block themes */
+/* Code block base styles */
 .shiki {
 	border-radius: 0.375rem;
 	padding: 1rem;
@@ -240,41 +240,27 @@
 	line-height: 1.5;
 }
 
-.shiki span[data-theme='light'] {
-	display: block;
-}
-
-.shiki span[data-theme='dark'] {
-	display: none;
-}
-
-.dark .shiki span[data-theme='light'] {
-	display: none;
-}
-
-.dark .shiki span[data-theme='dark'] {
-	display: block;
-}
-
 /* Anime section isolation - prevent global styles from leaking in */
+/* Revert only typography/color properties, preserve layout properties like object-fit */
 .anime-isolated {
 	isolation: isolate;
 	contain: style;
 }
 
-.anime-isolated .prose,
-.anime-isolated .prose * {
-	all: revert;
-}
-
-/* Ensure anime section resets any inherited prose/typography overrides */
 .anime-isolated h2,
 .anime-isolated h3,
-.anime-isolated p,
-.anime-isolated a {
-	all: revert;
+.anime-isolated p {
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	color: inherit;
+	margin: 0;
+	padding: 0;
+	text-align: inherit;
 }
 
-.anime-isolated img {
-	all: revert;
+.anime-isolated a {
+	color: inherit;
+	text-decoration: inherit;
 }

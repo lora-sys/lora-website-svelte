@@ -1,15 +1,12 @@
 <script lang="ts">
 	import { Command } from "bits-ui";
-	import { cn } from "$lib/utils";
 	import { goto } from "$app/navigation";
-	import { page } from "$app/stores";
-	import { onMount } from "svelte";
 	import { DATA } from "$lib/data/resume";
+	import { portal } from "$lib/actions/portal";
 
 	type Item = {
 		label: string;
 		keywords?: string[];
-		icon?: string;
 		action?: () => void;
 		href?: string;
 	};
@@ -70,11 +67,6 @@
 			open = false;
 		}
 	}
-
-	onMount(() => {
-		document.addEventListener("keydown", handleKeydown);
-		return () => document.removeEventListener("keydown", handleKeydown);
-	});
 </script>
 
 <svelte:document onkeydown={handleKeydown} />
@@ -84,67 +76,71 @@
 	class="flex items-center gap-2 rounded-md border border-border/50 bg-card/50 px-3 py-1.5 text-sm text-muted-foreground backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-primary/5 hover:text-primary cursor-pointer"
 >
 	<span class="text-xs">Search...</span>
-	<kbd class="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">Ctrl K</kbd>
+	<kbd class="hidden rounded bg-muted px-1.5 py-0.5 text-xs font-mono sm:inline">Ctrl K</kbd>
 </button>
 
 {#if open}
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div
-		class="fixed inset-0 z-50 bg-black/80"
+		use:portal
+		class="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
 		onclick={() => (open = false)}
+		onkeydown={(e) => { if (e.key === 'Escape') open = false; }}
 		role="dialog"
 		aria-modal="true"
-	></div>
-{/if}
-
-{#if open}
-	<div
-		class="fixed left-1/2 top-1/2 z-50 w-full -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border bg-background shadow-popover animate-in fade-in-0 zoom-in-95 sm:max-w-[490px] max-w-[calc(100vw-2rem)] max-h-[90vh] flex flex-col overflow-hidden"
+		tabindex="-1"
 	>
-		<Command.Root
-			bind:value={search}
-			class="divide-border flex h-full w-full flex-col divide-y self-start overflow-hidden rounded-xl border bg-background"
+		<div
+			class="w-full rounded-xl border border-border bg-background shadow-popover animate-in fade-in-0 zoom-in-95 sm:max-w-[490px] max-w-[calc(100vw-2rem)] max-h-[90vh] flex flex-col overflow-hidden"
+			onclick={(e) => e.stopPropagation()}
+			onkeydown={(e) => e.stopPropagation()}
 		>
-			<Command.Input
-				autofocus
-				placeholder="Search navigation, projects, skills..."
-				class="h-input bg-background placeholder:text-muted-foreground focus:outline-none inline-flex flex-1 truncate rounded-tl-xl rounded-tr-xl px-4 text-sm transition-colors"
-				onkeydown={(e) => {
-					if (e.key === "Escape") {
-						open = false;
-					}
-				}}
-			/>
-
-			<Command.List
-				class="max-h-[280px] overflow-y-auto overflow-x-hidden px-2 pb-2"
+			<Command.Root
+				bind:value={search}
+				class="divide-border flex h-full min-h-0 w-full flex-col divide-y overflow-hidden rounded-xl border bg-background"
 			>
-				<Command.Empty
-					class="text-muted-foreground flex w-full items-center justify-center pb-6 pt-8 text-sm"
-				>
-					No results found.
-				</Command.Empty>
+				<Command.Input
+					autofocus
+					placeholder="Search navigation, projects, skills..."
+					class="h-input bg-background placeholder:text-muted-foreground focus:outline-none inline-flex flex-1 truncate rounded-tl-xl rounded-tr-xl px-4 text-sm transition-colors"
+					onkeydown={(e) => {
+						if (e.key === "Escape") {
+							open = false;
+						}
+					}}
+				/>
 
-				{#each navigationGroups as group (group.name)}
-					<Command.Group>
-						<Command.GroupHeading
-							class="text-muted-foreground px-3 pb-2 pt-4 text-xs"
-						>
-							{group.name}
-						</Command.GroupHeading>
-						<Command.GroupItems>
-							{#each group.items as item (item.label)}
-								<Command.Item
-									class="rounded-button data-selected:bg-muted outline-hidden flex h-10 cursor-pointer select-none items-center gap-2 px-3 py-2.5 text-sm capitalize"
-									keywords={item.keywords}
-									onSelect={() => handleSelect(item)}
-								>
-									{item.label}
-								</Command.Item>
-							{/each}
-						</Command.GroupItems>
-					</Command.Group>
-				{/each}
-			</Command.List>
-		</Command.Root>
+				<Command.List
+					class="max-h-[300px] overflow-y-auto overflow-x-hidden px-2 pb-2"
+				>
+					<Command.Empty
+						class="text-muted-foreground flex w-full items-center justify-center pb-6 pt-8 text-sm"
+					>
+						No results found.
+					</Command.Empty>
+
+					{#each navigationGroups as group (group.name)}
+						<Command.Group>
+							<Command.GroupHeading
+								class="text-muted-foreground px-3 pb-2 pt-4 text-xs"
+							>
+								{group.name}
+							</Command.GroupHeading>
+							<Command.GroupItems>
+								{#each group.items as item (item.label)}
+									<Command.Item
+										class="rounded-button data-selected:bg-muted outline-hidden flex h-10 cursor-pointer select-none items-center gap-2 px-3 py-2.5 text-sm capitalize"
+										keywords={item.keywords}
+										onSelect={() => handleSelect(item)}
+									>
+										{item.label}
+									</Command.Item>
+								{/each}
+							</Command.GroupItems>
+						</Command.Group>
+					{/each}
+				</Command.List>
+			</Command.Root>
+		</div>
 	</div>
 {/if}

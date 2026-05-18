@@ -4,7 +4,7 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { DATA } from '$lib/data/resume';
 
-	let { zoomFactor = 1.5, lensSize = 200 } = $props();
+	let { zoomFactor = 1.15, lensSize = 140 } = $props();
 </script>
 
 <section id="anime" class="py-12">
@@ -18,11 +18,11 @@
 						<div class="p-2">
 							<Lens {zoomFactor} {lensSize}>
 								{#snippet children()}
-									<div class="relative aspect-[3/4] overflow-hidden rounded-xl">
+									<div class="relative aspect-[2/3] overflow-hidden rounded-xl bg-card/50">
 										<img
 											src={anime.image}
 											alt={anime.name}
-											class="h-full w-full object-cover"
+											class="h-full w-full object-contain"
 											loading="lazy"
 											decoding="async"
 										/>

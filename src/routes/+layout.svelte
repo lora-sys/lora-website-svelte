@@ -1,6 +1,5 @@
 <script lang="ts">
 	import TopNav from '$lib/components/portfolio/TopNav.svelte';
-	import Command from '$lib/components/magic/command/command.svelte';
 	import GridPattern from '$lib/components/magic/grid-pattern/grid-pattern.svelte';
 	import Meteors from '$lib/components/magic/meteors/meteors.svelte';
 	import SmoothCursor from '$lib/components/magic/smooth-cursor/smooth-cursor.svelte';

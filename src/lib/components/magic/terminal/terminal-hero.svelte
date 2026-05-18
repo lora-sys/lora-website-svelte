@@ -5,7 +5,6 @@
 	import { DATA } from '$lib/data/resume';
 	import BorderBeam from '$lib/components/magic/border-beam/border-beam.svelte';
 	import MagicCard from '$lib/components/magic/magic-card.svelte';
-	import { Signature } from '$lib/components/spell/signature';
 
 	interface Props {
 		class?: string;
@@ -15,7 +14,6 @@
 
 	let commandInput = $state('');
 	let commandHistory = $state<string[]>([]);
-	let showSignature = $state(false);
 	let konamiIndex = $state(0);
 	let toastMessage = $state('');
 	let showToast = $state(false);
@@ -50,8 +48,17 @@
 		}
 	}
 
+	function scrollToSection(id: string): boolean {
+		const el = document.getElementById(id);
+		if (el) {
+			el.scrollIntoView({ behavior: 'smooth' });
+			return true;
+		}
+		return false;
+	}
+
 	function handleCommand(cmd: string) {
-		const trimmed = cmd.trim().toLowerCase();
+		const trimmed = cmd.trim().toLowerCase().replace(/^\/+/, '');
 		commandHistory = [...commandHistory, `$ ${cmd}`];
 
 		if (trimmed === 'help') {
@@ -62,6 +69,7 @@
 				'  projects   View my projects',
 				'  about      Learn about me',
 				'  contact    Get in touch',
+				'  skills     Jump to skills section',
 				'  clear      Clear terminal',
 				'  neofetch   System info',
 				'  easteregg  ???'
@@ -73,12 +81,11 @@
 			setMode('light');
 			commandHistory = [...commandHistory, '  Switched to light mode'];
 		} else if (trimmed === 'projects') {
-			commandHistory = [
-				...commandHistory,
-				'  Projects:',
-				...DATA.projects.map((p, i) => `  [${i + 1}] ${p.title} - ${p.description.slice(0, 60)}...`),
-				'  Type "open <number>" to visit a project'
-			];
+			if (scrollToSection('projects')) {
+				commandHistory = [...commandHistory, '  Navigating to projects...'];
+			} else {
+				commandHistory = [...commandHistory, '  Section "projects" not found on this page'];
+			}
 		} else if (trimmed.startsWith('open ')) {
 			const num = parseInt(trimmed.split(' ')[1]) - 1;
 			if (num >= 0 && num < DATA.projects.length) {
@@ -89,19 +96,23 @@
 				commandHistory = [...commandHistory, '  Invalid project number'];
 			}
 		} else if (trimmed === 'about') {
-			commandHistory = [
-				...commandHistory,
-				`  Name: ${DATA.name}`,
-				`  Location: ${DATA.location}`,
-				`  ${DATA.description}`
-			];
+			if (scrollToSection('about')) {
+				commandHistory = [...commandHistory, '  Navigating to about...'];
+			} else {
+				commandHistory = [...commandHistory, '  Section "about" not found on this page'];
+			}
 		} else if (trimmed === 'contact') {
-			commandHistory = [
-				...commandHistory,
-				'  Contact:',
-				...Object.values(DATA.contact.social).map(link => `  ${link.name}: ${link.url}`),
-				'  Type "copy <name>" to copy a link'
-			];
+			if (scrollToSection('contact')) {
+				commandHistory = [...commandHistory, '  Navigating to contact...'];
+			} else {
+				commandHistory = [...commandHistory, '  Section "contact" not found on this page'];
+			}
+		} else if (trimmed === 'skills') {
+			if (scrollToSection('skills')) {
+				commandHistory = [...commandHistory, '  Navigating to skills...'];
+			} else {
+				commandHistory = [...commandHistory, '  Section "skills" not found on this page'];
+			}
 		} else if (trimmed.startsWith('copy ')) {
 			const name = trimmed.split(' ').slice(1).join(' ');
 			const social = Object.values(DATA.contact.social).find(
@@ -131,8 +142,20 @@
 		} else if (trimmed === 'exit') {
 			commandHistory = [...commandHistory, '  There is no escape from this terminal.'];
 		} else if (trimmed === 'easteregg') {
-			commandHistory = [...commandHistory, '  ...you found it.'];
-			triggerKonami();
+			commandHistory = [
+				...commandHistory,
+				'  ...you found it.',
+				'',
+				'  ██████╗ ██╗███╗   ██╗ ██████╗ ███████╗██████╗ ███╗   ██╗',
+				'  ██╔══██╗██║████╗  ██║██╔════╝ ██╔════╝██╔══██╗████╗  ██║',
+				'  ██║  ██║██║██╔██╗ ██║██║  ███╗█████╗  ██████╔╝██╔██╗ ██║',
+				'  ██║  ██║██║██║╚██╗██║██║   ██║██╔══╝  ██╔══██╗╚██║██╔╝',
+				'  ██████╔╝██║██║ ╚████║╚██████╔╝███████╗██║  ██║ ╚███╔╝',
+				'  ╚═════╝ ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝  ╚══╝',
+				'',
+				'  > Gamer mode activated. Welcome back, player.',
+				'  > Use Ctrl+K to explore more commands.'
+			];
 		} else if (trimmed) {
 			commandHistory = [
 				...commandHistory,
@@ -148,22 +171,6 @@
 		if (e.key === 'Enter' && commandInput.trim()) {
 			handleCommand(commandInput);
 		}
-
-		// Konami code detection
-		if (e.key === KONAMI_CODE[konamiIndex]) {
-			konamiIndex++;
-			if (konamiIndex === KONAMI_CODE.length) {
-				triggerKonami();
-				konamiIndex = 0;
-			}
-		} else {
-			konamiIndex = 0;
-		}
-	}
-
-	function triggerKonami() {
-		showSignature = true;
-		setTimeout(() => { showSignature = false; }, 3000);
 	}
 
 	onMount(() => {
@@ -185,9 +192,9 @@
 </script>
 
 <div class="relative {className}">
-	<MagicCard glowColor="rgba(34,197,94,0.12)" class="border-term-green/20">
+	<MagicCard glowColor="rgba(52,211,153,0.12)" class="border-zinc-800">
 		<!-- Terminal Header -->
-		<div class="flex items-center gap-2 border-b border-border/50 bg-term-main px-4 py-2.5">
+		<div class="flex items-center gap-2 border-b border-border/50 bg-zinc-950 px-4 py-2.5">
 			<div class="flex gap-1.5">
 				<div class="h-3 w-3 rounded-full bg-red-500/80 transition-colors hover:bg-red-500"></div>
 				<div class="h-3 w-3 rounded-full bg-yellow-500/80 transition-colors hover:bg-yellow-500"></div>
@@ -202,13 +209,13 @@
 		<!-- Terminal Body -->
 		<div class="min-h-[20rem] p-4 font-mono text-sm">
 			<!-- Command History -->
-			<div class="mb-4 max-h-72 space-y-0.5 overflow-y-auto scrollbar-thin">
+			<div class="mb-4 max-h-72 space-y-0.5 overflow-x-hidden overflow-y-auto scrollbar-thin">
 				{#each commandHistory as line, idx (idx)}
 					<div
 						class="whitespace-pre-wrap {line.startsWith('$')
 							? 'text-foreground font-bold'
 							: line.startsWith('>')
-								? 'text-term-green animate-[fadeIn_0.3s_ease-out]'
+								? 'text-emerald-400 animate-[fadeIn_0.3s_ease-out]'
 								: 'text-muted-foreground'}"
 					>
 						{line}
@@ -219,7 +226,7 @@
 			<!-- Input Line -->
 			{#if bootComplete}
 				<div class="flex items-center gap-2 border-t border-border/30 pt-3">
-					<span class="select-none text-term-green">$</span>
+					<span class="select-none text-emerald-400">$</span>
 					<input
 						bind:this={inputEl}
 						bind:value={commandInput}
@@ -231,7 +238,7 @@
 						autocapitalize="off"
 						spellcheck="false"
 					/>
-					<span class="animate-pulse text-term-green">|</span>
+					<span class="animate-pulse text-emerald-400">|</span>
 				</div>
 			{/if}
 		</div>
@@ -239,7 +246,7 @@
 		<!-- Border Beam -->
 		<BorderBeam
 			size={180}
-			colorFrom="var(--term-green, #22c55e)"
+			colorFrom="var(--emerald-400, #34d399)"
 			colorTo="#9c40ff"
 			duration={8}
 		/>
@@ -248,23 +255,13 @@
 	<!-- Toast -->
 	{#if showToast}
 		<div class="fixed bottom-24 left-1/2 z-50 -translate-x-1/2 animate-[slideUp_0.3s_ease-out]">
-			<div class="rounded-lg border border-term-green/30 bg-term-main px-4 py-2 font-mono text-sm text-term-green shadow-lg shadow-term-green/10">
+			<div class="rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-2 font-mono text-sm text-emerald-400 shadow-lg shadow-emerald-500/10">
 				{toastMessage}
 			</div>
 		</div>
 	{/if}
 
-	<!-- Konami Signature Animation -->
-	{#if showSignature}
-		<div
-			class="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
-			role="dialog"
-			aria-modal="true"
-		>
-			<Signature text={DATA.name} fontSize={72} />
-		</div>
-	{/if}
-</div>
+	</div>
 
 <style>
 	@keyframes fadeIn {
