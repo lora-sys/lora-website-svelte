@@ -219,7 +219,10 @@
 				<!-- Footer -->
 				<Separator class="my-8 border-border/50" />
 				<div class="flex items-center justify-between font-mono text-sm text-muted-foreground">
-					<a href={`${base}/blog`} class="flex items-center gap-1 transition-colors hover:text-term-green">
+					<a
+						href={`${base}/blog`}
+						class="flex items-center gap-1 transition-colors hover:text-term-green"
+					>
 						<span class="text-term-green">$</span> cd ../blog
 					</a>
 					<span>by {data.meta?.author ?? 'lora-sys'}</span>

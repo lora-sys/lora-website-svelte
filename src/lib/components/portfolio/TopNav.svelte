@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { DATA } from '$lib/data/resume';
 	import Command from '$lib/components/magic/command/command.svelte';
-		import { base } from '$app/paths';
+	import { base } from '$app/paths';
 
 	let currentPath = $derived($page.url.pathname);
 	let mobileMenuOpen = $state(false);
@@ -33,7 +33,7 @@
 		<!-- Left: Logo + Breadcrumb -->
 		<div class="flex items-center gap-6">
 			<a
-				href={base + "/"}
+				href={base + '/'}
 				class="font-mono text-sm font-bold text-term-green transition-colors hover:text-gold"
 			>
 				{DATA.name}<span class="animate-pulse">_</span>

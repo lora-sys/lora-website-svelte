@@ -26,7 +26,11 @@
 			items: [
 				{ label: 'Home', keywords: ['home', 'hero', 'landing'], href: `${base}/` },
 				{ label: 'Blog', keywords: ['blog', 'posts', 'articles'], href: `${base}/blog` },
-				{ label: 'Projects', keywords: ['projects', 'work', 'portfolio'], href: `${base}/#projects` },
+				{
+					label: 'Projects',
+					keywords: ['projects', 'work', 'portfolio'],
+					href: `${base}/#projects`
+				},
 				{ label: 'Skills', keywords: ['skills', 'tech', 'stack'], href: `${base}/#skills` },
 				{ label: 'About', keywords: ['about', 'me', 'resume'], href: `${base}/#about` },
 				{ label: 'Contact', keywords: ['contact', 'social', 'links'], href: `${base}/#contact` }

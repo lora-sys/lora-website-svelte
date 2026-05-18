@@ -6,7 +6,7 @@
 	import '../app.css';
 	import { ModeWatcher, setMode } from 'mode-watcher';
 	import * as Tooltip from '$lib/components/ui/tooltip';
-		import { base } from '$app/paths';
+	import { base } from '$app/paths';
 	import '@fontsource/space-grotesk/index.css';
 	import '@fontsource/syne/index.css';
 
