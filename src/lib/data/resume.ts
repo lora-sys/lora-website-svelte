@@ -30,6 +30,12 @@ import LinkedinDarkSvg from '$lib/imgs/linkedin-dark.svg';
 import TwitterSvg from '$lib/imgs/x.svg';
 import TwitterDarkSvg from '$lib/imgs/x-dark.svg';
 
+import BilibiliSvg from '$lib/imgs/bilibili.svg';
+import BilibiliDarkSvg from '$lib/imgs/bilibili-dark.svg';
+
+import YouTubeSvg from '$lib/imgs/youtube.svg';
+import YouTubeDarkSvg from '$lib/imgs/youtube-dark.svg';
+
 import BuildSpaceImg from '$lib/imgs/buildspace.jpg';
 import WaterLooImg from '$lib/imgs/waterloo.png';
 
@@ -165,13 +171,20 @@ export const DATA = {
 				navbar: true,
 				dark_icon: PeerListDarkSvg
 			},
-			// Youtube: {
-			// 	name: 'Youtube',
-			// 	url: 'https://github.com/SikandarJODD',
-			// 	// // icon: Icons.youtube,
-			// 	icon: Youtube,
-			// 	navbar: true
-			// },
+			YouTube: {
+				name: 'YouTube',
+				url: 'https://www.youtube.com/',
+				icon: YouTubeSvg,
+				navbar: true,
+				dark_icon: YouTubeDarkSvg
+			},
+			Bilibili: {
+				name: 'Bilibili',
+				url: 'https://space.bilibili.com/',
+				icon: BilibiliSvg,
+				navbar: true,
+				dark_icon: BilibiliDarkSvg
+			},
 			email: {
 				name: 'Send Email',
 				url: '#',
