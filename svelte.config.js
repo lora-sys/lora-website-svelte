@@ -61,6 +61,9 @@ const config = {
 	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
 
 	kit: {
+		prerender: {
+			handleHttpError: 'warn'
+		},
 		paths: {
 			base: process.env.BASE_PATH ?? ''
 		},

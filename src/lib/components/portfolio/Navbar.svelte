@@ -5,6 +5,7 @@
 	import DockTooltip from '../magic/DockTooltip.svelte';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import ModeToggle from './ModeToggle.svelte';
+	import { base } from '$app/paths';
 </script>
 
 <div
@@ -21,7 +22,7 @@
 				<DockIcon {magnification} {mouseX} {distance}>
 					<DockTooltip label={item.label}>
 						<a
-							href={item.href}
+							href={`${base}${item.href}`}
 							class="flex size-12 items-center justify-center rounded-full transition-all duration-300 hover:scale-110 hover:bg-gold/20 hover:text-gold hover:shadow-[0_0_15px_hsl(45_100%_70%_/0.3)] focus-visible:ring-2 focus-visible:ring-gold/50"
 						>
 							<item.icon class="size-[18px]" strokeWidth={1.5} />

@@ -81,7 +81,7 @@ export const DATA = {
 		{ href: '/blog', icon: NotebookIcon, label: 'Blog' },
 		{ href: '/#anime', icon: FilmIcon, label: 'Anime' },
 		{ href: '/#favorites', icon: HeartIcon, label: 'Favorites' },
-		{ href: '#projects', icon: CodeIcon, label: 'Projects' }
+		{ href: '/#projects', icon: CodeIcon, label: 'Projects' }
 	],
 	anime: [
 		{
