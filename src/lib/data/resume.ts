@@ -174,14 +174,14 @@ export const DATA = {
 			},
 			YouTube: {
 				name: 'YouTube',
-				url: 'https://www.youtube.com/',
+				url: 'https://www.youtube.com/@MierPiter33280',
 				icon: YouTubeSvg,
 				navbar: true,
 				dark_icon: YouTubeDarkSvg
 			},
 			Bilibili: {
 				name: 'Bilibili',
-				url: 'https://space.bilibili.com/',
+				url: 'https://space.bilibili.com/闲鱼蝶',
 				icon: BilibiliSvg,
 				navbar: true,
 				dark_icon: BilibiliDarkSvg
@@ -471,7 +471,7 @@ export const DATA = {
 		{
 			name: 'Music',
 			description: 'Play my favorite tracks on Spotify',
-			background: '/images/favorites/music.png',
+			background: '/images/favorites/music.jpg',
 			href: 'https://open.spotify.com/embed/track/54pvEYFocTlvIAQOfXSjqV?utm_source=generator&theme=0',
 			cta: 'Listen Now',
 			icon: Headphones,
