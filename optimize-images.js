@@ -2,8 +2,8 @@ import sharp from 'sharp';
 import { readdir, stat, rename } from 'fs/promises';
 import { join, extname, basename, dirname } from 'path';
 
-const QUALITY = 75;          // Good balance between size and quality
-const MAX_WIDTH = 1000;      // Reasonable max width for web display
+const QUALITY = 75; // Good balance between size and quality
+const MAX_WIDTH = 1000; // Reasonable max width for web display
 
 const SUPPORTED_EXTENSIONS = ['.jpg', '.jpeg', '.png'];
 
@@ -52,7 +52,9 @@ async function optimizeImages(dirPath) {
 			const savings = originalSize - newStats.size;
 			totalSaved += savings;
 
-			console.log(`   ✅ Optimized: ${(newStats.size / 1024).toFixed(1)}KB (${((savings / originalSize) * 100).toFixed(1)}% saved)`);
+			console.log(
+				`   ✅ Optimized: ${(newStats.size / 1024).toFixed(1)}KB (${((savings / originalSize) * 100).toFixed(1)}% saved)`
+			);
 
 			// --- Option 2: Also generate WebP version ---
 			const webpPath = join(dirPath, nameWithoutExt + '.webp');
@@ -71,7 +73,9 @@ async function optimizeImages(dirPath) {
 
 			const webpStats = await stat(webpPath);
 			const webpSavings = originalSize - webpStats.size;
-			console.log(`   🌐 WebP:    ${(webpStats.size / 1024).toFixed(1)}KB (${((webpSavings / originalSize) * 100).toFixed(1)}% saved)`);
+			console.log(
+				`   🌐 WebP:    ${(webpStats.size / 1024).toFixed(1)}KB (${((webpSavings / originalSize) * 100).toFixed(1)}% saved)`
+			);
 
 			totalFiles++;
 		}
